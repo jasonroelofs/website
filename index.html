@@ -1,5 +1,36 @@
 ---
 layout: default
 ---
+<div class="row span15">
+  <div class="span4">
+    <h2 class="title">About</h2>
 
-Velkommen
+    <p>
+    My name is Jason Roelofs, and I write code.
+    </p>
+
+    <p>
+    I work for <a href="https://www.bloomfire.com">Bloomfire</a> building kick-ass social and informal learning solutions for groups and companies using <a href="http://ruby-lang.org">Ruby</a> and <a href="http://rubyonrails.org">Rails</a>.
+    </p>
+
+    <p>
+    I run a number of open source projects, which you can see on the <a href="/projects.html">Projects</a> page.
+    </p>
+
+    <p>
+    You can follow my work and exploits here, on Twitter (<a href="https://twitter.com/jameskilton">@jameskilton</a>) and on <a href="https://github.com/jameskilton">Github</a>.
+    </p>
+  </div>
+
+  <div class="span10">
+    <div class="current_post">
+      {% for post in site.posts limit:1 %}
+        {% include post.html %}
+      {% endfor %}
+    </div>
+
+    <div class="recent_posts">
+    </div>
+  </div>
+</div>
+
