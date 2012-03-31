@@ -1,0 +1,62 @@
+---
+layout: post
+title: Embedding IRB into your Ruby application
+tags:
+- programming
+- ruby
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '2'
+---
+A feature I realized would be very helpful to have in <a href="http://github.com/jameskilton/rbpluslpus">rb++</a> is a debugging console. Basically, I wanted the ability to drop into an irb session and have available to me the internals of rb++ and rbgccxml, all set up for the sources I've specified for the given extension. 
+
+Turns out, this is a lot harder to figure out than it would initially seem. The irb code is quite complex and nothing there is documented in any way shape or form. Also, searches around the Internet came back with results that were some six years old, and while helpful, did not pertain to my particular case. 
+
+Then I remembered that <a href="http://rubyforge.org/projects/ruby-debug/">ruby-debug</a> does exactly what I'm looking for. A quick glance in that code got me the code snippet I needed.
+
+<pre lang="ruby">
+require 'irb'
+
+module IRB # :nodoc:
+  def self.start_session(binding)
+    unless @__initialized
+      args = ARGV
+      ARGV.replace(ARGV.dup)
+      IRB.setup(nil)
+      ARGV.replace(args)
+      @__initialized = true
+    end
+    
+    workspace = WorkSpace.new(binding)
+
+    irb = Irb.new(workspace)
+
+    @CONF[:IRB_RC].call(irb.context) if @CONF[:IRB_RC]
+    @CONF[:MAIN_CONTEXT] = irb.context
+
+    catch(:IRB_EXIT) do
+      irb.eval_input
+    end
+  end
+end
+</pre>
+
+And it's use is quite simple. When you want to drop into an irb session, you simply do
+
+<pre lang="ruby">
+IRB.start_session(binding)
+</pre>
+
+and you will have a code prompt with all data available at your finger-tips. 
+
+<a href="http://github.com/jameskilton/rbplusplus/commit/ebb28d290ef6c0e2b7a71032f14a20c9e5150e26">See the related rb++ commit</a>
+
+You use this feature in rb++ as follows:
+
+<code>
+ruby your_extension_file.rb console
+</code>
+
+From there, start playing around with the parsed source tree using either @parser or self.namespace to get started.

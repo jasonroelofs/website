@@ -1,0 +1,28 @@
+##
+# Jekyll config
+##
+auto:         true
+server:       true
+server_port:  8080
+pygments:     true
+pagination:   10
+permalink:    /:year/:month/:day/:title/
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - Rakefile
+  - tmp
+include:
+  - assets
+
+##
+# Global Site config
+##
+title:        "Forty-Two"
+url:          "http://jasonroelofs.com"
+
+author:
+  name: "Jason Roelofs"
+  email: "jasongroelofs@gmail.com"
+  github: "jameskilton"
+

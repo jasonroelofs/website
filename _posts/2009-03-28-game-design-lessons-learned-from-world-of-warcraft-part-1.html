@@ -1,0 +1,76 @@
+---
+layout: post
+title: Game design lessons learned from World of Warcraft - Part 1
+tags:
+- game design
+- gaming
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '2'
+---
+Given that I love gaming, and I love programming, it's only natural that I put the two together. Now while I haven't yet gotten deeply into game development and design, I have become acutely aware of design decisions made in the games that I play, and I like to take mental notes of what works, and what doesn't. I also spend a lot of time watching game-related news and lurk the <a href="http://gamedev.net">GameDev</a> forums to keep up-to-date on the latest game development trends and advances. 
+
+I figured, now that I've got a blog, it's time to start taking more permanent notes on the design decisions, both good and bad, of the various games I play. To start, I'm going to pick on the 800lb Gorilla in the room, <a href="http://www.worldofwarcraft.com">World of Warcraft</a> (known here on out as WoW). This is the first of what will be a multi-part series of articles, as I tend to delve in to rants and ramblings at time. However, I will try to keep it all coherent. So, without further ado...
+
+<!--more-->
+
+I've been playing this game on and off for nigh three years now. I've seen plenty of ups and plenty of downs, been a part of quite a few guild breakups, and have developed an almost unhealthy love of criticizing and critiquing every little change Blizzard make to the game. I'll admit, it's not the best state of mind to be in, and many-a-time it has eaten away at me and caused me to loose all enjoyment of the game as I end up only able to focus on what's wrong and not what's fun. 
+
+What follows are the results of my brooding over the what and the why of the decisions made at Blizzard. Why does Blizzard make the decisions they do, what are the ramifications, and what can other game designers and developers learn from one of the best companies in the business. To start off, the most important rule about game design in general is quite simple:
+
+<h3>You are building <em>your</em> game. Make the decisions <em>you</em> think are right.</h3>
+
+I give Blizzard HUGE applause for what they have accomplished with WoW. It is by far the most complicated game ever created, and the fact that they have kept it running, continually added more, and still kept the same general WoW atmosphere and Blizzard Polish since release is a testament to the courage the development team has in shaping this massive game over time. Given all the flak they receive on a daily basis on their official forums and forums across the world, Blizzard rolls right along with the punches.
+
+If you want your game to be successful, trust your instincts. It's your game, not theirs. Make the game <b>you</b> want to play. That said...
+
+<h3>Some players will know the game better than you</h3>
+
+An interesting phenomenon I've been following with WoW is the statements of theorycrafters (those players that constantly calculate and run all the numbers they can get a hold of, to find the best, the worst, and everything in between) contrasted to the official statements of Blizzard, and what I've noticed is this: the theorycrafter community is almost always right. 
+
+As an example (and this will be difficult to really show without forum posts, but those are gone so please bear with me), with the most recent expansion to the game, The Wrath of the Lich King, we'll look at how WoW's PvP game became, quite frankly, a failure. 
+
+Wrath of the Lich King came with three changes that worked together to completely dismantle the game's PvP.
+
+<ul>
+<ol>Up the level cap to 80</ol>
+<ol>Restart everyone on even footing as of level 71</ol>
+<ol>Introduction of the Death Knight</ol>
+</ul>
+
+<b>Upping the level cap</b> is a normal move for any MMO expansion, and follows with the previous 10 level jump we saw in The Burning Crusade (TBC), the first expansion. There needs to be significant increases in the status of player characters, so it stands to reason that a level 80 character would easily tromp a level 70 character.
+
+<b>Restarting on equal footing</b> is almost a necessity given WoW's PvE end-game. Now, first and foremost, WoW is a gear driven game. Everything you do to make your character more powerful involves gear. To help be better in PvP, you get better gear. To do better, and progress farther in PvE, you acquire better and better gear. The side effect of this is, a level capped character with full end-game PvE gear is far more powerful than a character who just hit the level cap. With a new expansion, and 10 more levels to grind through, Blizzard could not require high end PvE gear to continue through the new content or they would have very quickly lost a large portion of the player base (as only about 10% of the population really experience much of the end-game content). 
+
+So, the new area, Northrend, had to offer quest reward items and random world drop items that were almost equal in power to the previous end-game PvE gear, putting all characters back on an even footing. This means that everyone suddenly does more damage, has more health, and is overall significantly stronger (example: my best raiding DPS in TBC was around 1500. When I started raiding again in Lich King, I was already doing 2500 and quickly improving). In general, the calculations showed that a level 80 character started out about 2.5 to 3 times more powerful than at level 70. 
+
+<b>The introduction of the Death Knight</b> was long in coming, and heavily anticipated. A new class for WoW was just what the game needed to bring a fresh breath of air to the game some people had been playing for 3 straight years by then. It is a class with a novel new resource system (Runes and Runic Power), tons of new spells and abilities to master, and an entire new starting area built just for the class and its lore leading up to Lich King. Blizzard put everything into this class, they wanted it to be a huge success, and quite a success it has been, and a major sore spot as well.
+
+With the triage of these three major changes, WoW's PvP was doomed from the start. It didn't take the theorycrafters long to crunch the numbers, to play with classes on the Test Realm, and to come to the conclusion that at level 80, characters were either going to do way too much damage, or they weren't going to have high enough health pools to soak up the huge damage increase. Posts on the official forums and post on respected theorycrafting forums like Elitist Jerks showed, argued, and asked constantly for Blizzard to re-think their stance on character power at level 80, but Blizzard would have none of it. If there's one statement seen the most, it was "We will just wait and see what happens" often followed by "We think it will be ok, characters will have enough health."
+
+Well the "wait and see" has happened, and the game's PvP devolved to the worst it's ever been. Healers gave up trying to heal, because you can't heal someone who gets killed in 3 seconds or less. Entire classes stopped playing because they either couldn't do the damage others could, or they couldn't get out of the way of the incoming damage. It was, and in most cases still is, absolute mayhem. Skill has been shoved into a trailer and gear and choice of class is the king of PvP now. To see what I mean, here's the top 10 ranked PvP Arena 3v3 teams as of the March 24th:
+
+<pre>
+The top 10 teams of the 2009 Arena Tournament’s online qualifier as of March 24, 2009 are listed below:
+
+Rank. Team Name	                Classes	
+1. well then                        Death Knight, Paladin, Warlock
+2. BARKSDALE CREW             Death Knight, Paladin, Warlock
+3. monkey attack squad        Hunter, Mage, Shaman
+4. GET MONEY GET PAYCE     Death Knight, Hunter, Paladin	
+5. Walrus Attack Squad	        Hunter, Mage, Priest
+6. Paradorn’s Team	        Hunter, Paladin, Warlock
+7. NO LIGHTNING GEN BRAH	Death Knight, Paladin, Warlock
+7. Nekos’ Team	                Death Knight, Death Knight, Paladin
+9. faceroll tunnel vision         Paladin, Priest, Shaman
+10. Wd’s Team	                Death Knight, Paladin, Warlock
+
+</pre>
+
+Pretty obvious to see just how inbalanced the PvP game has become. The top teams, while good at PvPing anyway, are so much better simply because of the class composition of the team. Entire classes are absent of this list: Druid, Warrior, and Rogue, which ironically enough were always present in Arena teams during TBC. 
+
+Anyway, it's a lot of talk to make a point, but the severity of the failure <b>because</b> Blizzard didn't listen to the theorycrafters at all needs to be shown. There have been many steps since taken to "tone down burst damage" since Lich King's release, but Blizzard has a long way to go. More time up front, and a willingness to admit that they were wrong, and Blizzard could have made huge strides towards preventing this catastrophe. Blizzard has been working hard since the release of TBC to make WoW's Arena a viable "e-sport", but with current state of Lich King's PvP, they have taking a very severe blow to that work, making it that much harder to convince people that Arena is worth standing on the pedestal with games like Counter Strike and Quake.
+
+<a href="http://jameskilton.com/2009/05/01/game-design-lessons-learned-from-world-of-warcraft-part-2/">Continue with Part 2</a>

@@ -1,0 +1,72 @@
+---
+layout: post
+title: Component / Entity Systems
+tags:
+- game design
+- programming
+- slartibartfast
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '2'
+---
+<blockquote>Note: I've put this work on hold and am going another direction with this project. The C++ code is found in the ogre branch. I'll have a new post about what I'm putting together soon!</blockquote>
+
+If you've done any sort of game development in the past 5 years you've most likely heard of "Component Systems" or "Entity Systems" for doing object and scene management over an OOP hierarchy. Object Hierarchies may start out clean, but over the course of the development of a game, become a very difficult to work with. Components -- very succinctly built self-contained clusters of data and logic that can be added to, or taken away from, anything -- are the answer.
+
+There is a ton written about these kinds of systems. A quick Google search of either of the terms in the title will get you to many of the most popular posts describing the why of Component systems, so I'm not going to dive into that myself. Instead, this post will be explaining how I'm implementing Components in <a href="http://github.com/jameskilton/slartibarfast">Project Slartibartfast</a>, why I've made the decisions I've made, and how I plan on continuing development with this system.
+
+As an avid supporter of Open Source software, it's been annoying reading so much about this radically different methodology and find very little code, or code examples that don't solve the issue I'm trying to solve, concerning Components. Now that I've sat down and actually turned an idea in a working system, I realize that these systems really do end up being very specific in their implementation to the product at hand, be it a game, an engine, or something not game related at all. So this isn't per-say a "this is how you implement Components and Entities" but an exposé of how I've decided to implement this in my game.
+
+As an aside, because these arguments come up so often, my personal view of software development and design is that pragmatism beats idealism every single time. As long as you have a good reason for your decisions, build something that works, don't fret that it's not a "best practice."
+
+That said, lets dive into the Component system of Project Slartibartfast.
+
+<!--more-->
+
+When I sat down to start designing the base system this game will use, I needed to answer two questions: <em>Where does the data live?</em> and <em>Where does the logic live?</em> These questions will have vastly different answers depending on who you talk to, what they're trying to build, and what language they're working in. Do the components know about the data? Does the Entity have data and Components the logic? Are there other systems that handle the logic as well as the connecting of Components to Entities? It's important that you can put an answer to these questions before you start coding because once you've started building a system following your answers, changing your mind later usually results in a very large rewrite and big headaches getting everything running again.
+
+I decided to take as pragmatic an approach as possible and build a system that's simple but no simpler, easy to extend, and doesn't require a bunch of crazy C++ syntax or templates. I came up with the following.
+
+<b>Actors</b>
+
+Actor is what I'm naming my Entity construct. My first real foray into modern game development was UnrealScript in Unreal Engine 2, which uses the Actor terminology and it's just stuck with me. Actors are very simple, they only hold the list of Components that define them. Every Actor has a TransformComponent by default which defines how they hook into the world (an idea I pulled from Unity3D). Due to this fact, the TransformComponent is defined directly on the Actor itself and not in the components array.
+
+<a href="https://github.com/jameskilton/slartibartfast/blob/ogre/include/Actor.h">Actor.h</a>
+
+<b>Components</b>
+
+Components are pure data. There is no per-frame logic in these. Each component knows what data it needs to keep track of for the system to work. This data can include publicly usable data (position, rotation, scale) or hooks into various subsystems (like a SceneNode or Camera in Ogre). Because these classes are pure data, they're in most part just a collection of public attributes.
+
+<a href="https://github.com/jameskilton/slartibartfast/tree/ogre/include/components">Implemented Components</a>
+
+When a Component is added to an Actor via addComponent(), the Actor ensures that the Component is registered with it's appropriate Manager. The logic for Component <-> Manager registration is handled with the REGISTER_WITH macro that's added to each Component. After fighting for a while to make Managers and Components all OO happy with templates and polymorphism I blew the entire system away (don't you just love 300 page error reports due to gcc template errors?) and implemented a few macros to define some helper methods common across all Components and Managers. This turned out to be much, much cleaner and easier to work with.
+
+<b>Managers</b>
+
+Managers are logic. If there's a Component in the system, it has a related Manager to, well, manage it. Components get initialized by their Manager when given to an Actor. The Manager has update() for any per-frame updates that need to happen for the Components it's in charge of. Managers also keep internally a list of all of their Components. Only Components added to Actors are considered "live".
+
+<a href="https://github.com/jameskilton/slartibartfast/tree/ogre/include/managers">Managers Definitions</a> / <a href="https://github.com/jameskilton/slartibartfast/tree/ogre/src/managers">Managers Implementation</a>
+
+You'll notice that there are also macros in place here: MANAGER_IMPLEMENTATION and MANAGER_DEFINITION. These, like the Component macros, define common functionality across Managers for dealing with Components. With this I'm able to keep a very specific list of Components for each Manager instead of fighting with polymorphism, templates, and types.
+
+Also, Managers are Singletons. There's going to be quite a few of them as this project progresses and it was the only idea that made sense.
+
+<b>API</b>
+
+With all of the above now in place, the API for using Actors and Components couldn't be simpler. It's straight C++ object handling:
+
+<script src="https://gist.github.com/874671.js?file=gistfile1.cpp"></script>
+
+ Everything here just works. The Ogre::Camera gets initialized, attached to the Actor's scene node to inherit rotations and translations. The Input is hooked up to provide a full 6 degrees of movement in two parts, MovementComponent handles the keyboard ESDF mappings, and MouseLookComponent of course handles the mouse input, and the Actor is placed into the world at the given location.
+
+Adding a Planet to the game is just as easy:
+
+<script src="https://gist.github.com/874688.js?file=gistfile1.cpp"></script>
+
+where we get a new Actor, set its scale through the TransformComponent I talked about earlier, then adding a Mesh representation to have something visual on the screen.
+
+Continuing from here, there is one convention that I break really badly that I wouldn't mind finding a cleaner way of handling. If you'll look at <a href="https://github.com/jameskilton/slartibartfast/blob/ogre/src/managers/CameraManager.cpp#L37-39">CameraManager.cpp</a> you'll see that I utterly beat and abuse the Law of Demeter. This is one aspect of Component systems that is probably the least "solved," for lack of a better word: communication between Components. An Ogre::Camera, for this system to work, needs to be directly attached to the SceneNode representing it in the world. This SceneNode is on the Actor's TransformComponent, so I have to go component -> actor -> transform -> sceneNode to get at that information. Since this is the simplest solution that works and doesn't really get in my way I don't really have a problem with it but if I do come up with a better solution I will be sure to post about it.
+
+And that's really it. I'm pretty happy with the system so far, it's easy to understand, handles communication automatically so I don't have to remember to connect anything, and is very easy to work with and extend. If any serious issues pop up with my decisions here, I'll be sure to update this blog as necessary.

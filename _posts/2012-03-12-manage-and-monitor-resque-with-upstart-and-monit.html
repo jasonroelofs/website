@@ -1,0 +1,62 @@
+---
+layout: post
+title: Manage and Monitor Resque with Upstart and Monit
+tags:
+- programming
+- sysops
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '2'
+---
+<a href="https://github.com/defunkt/resque">Resque</a>, the unix-y process and child based background worker library from <a href="http://github.com">Github</a>, is a joy to use. It's simple to set up and to integrate into your code, only requiring <a href="http://redis.io">Redis</a> for the queue, and runs through a single rake task from the command line. It really couldn't be easier for how scalable and robust the library is. What isn't easy, though, is managing and monitoring your Resque workers in production. There have been numerous attempts to solve this problem, including <a href="http://godrb.com/">god.rb</a>, <a href="http://mmonit.com/monit/">Monit</a>, <a href="https://github.com/arya/bluepill">bluepill</a>, <a href="https://github.com/nevans/resque-pool">resque-pool</a> and <a href="https://github.com/ddollar/foreman">foreman</a>, but from my experience all of these solve only 90% of the problem, and that last 10% is guaranteed to cause you pain either through fragility, complicated configuration, or not alerting properly when your workers disappear. I've come to believe that any tool that tries to handle both process management <strong>and</strong> monitoring and alerting is trying to do too much and can't satisfactorily do either.
+
+At <a href="http://bloomfire.com">Bloomfire</a> we've been using <a href="http://godrb.com/">god.rb</a> to manage and monitor our Resque workers for a while now, but it's never been great. We quickly realized that we couldn't expect the god process itself to always stay alive, so we hooked up Monit to monitor god (you can imagine how many jokes this spawned...). This worked well enough until we had to upgrade our REE install to 2011.12 to close the String#hash security hole. With that upgrade, god.rb started very randomly segfaulting somewhere deep inside of Thread. Most of the time this crash would leave the Resque workers running and god.rb would pick up where it left off, but sometimes it took everything down in the crash. From the reports I've heard so far (via <a href="https://github.com/mojombo/god/issues/81">Issue #81</a>) REE 2012.02 doesn't fix the segfault problem, so it's time to move away from Ruby-based solutions entirely. Enter Upstart.
+
+<!--more-->
+
+<h2>Upstart</h2>
+
+<a href="http://upstart.ubuntu.com/">Upstart</a> has actually been around for a number of years. If you're running any recent Ubuntu build even as early as 10.04 LTS, you are already running Upstart. In short, Upstart manages your system, mainly through keeping services running but also through managing important system configurations. If you've ever dreaded writing yet another SysV init script and making sure your service handles it's own daemonizing, Upstart is the answer to all of your prayers. This service is the culmination of decades of system administration experience. It knows what you need to do, lets you do it very simply, and it doesn't get in your way. If you're curious just how much easier it is compared to SysV, check out the difference between Upstart's SSH and the SysV SSH script (from Ubuntu 10.04): <a href="https://gist.github.com/1987878">https://gist.github.com/1987878</a>. Not only is the Upstart script vastly simpler, but Upstart will also make sure the process stays running! If ssh dies for whatever reason, Upstart will know and will restart the service almost immediately. Try getting SysV to do that! On top of this, Upstart is completely reliable. It already manages the majority of core services on Ubuntu machines, so chances are, you're already relying on 100% uptime from Upstart.
+
+Before we dive into the actual Upstart config file, do note that this is for Ubuntu 10.04 LTS and thus an old version of Upstart itself. The newer versions of Upstart include better handling for running processes as different users, so when 12.04 LTS comes out, I'll be updating the scripts to use these new features.
+
+<h3>/etc/init/resque.conf</h3>
+
+The following is all you need to configure Upstart to run your Resque workers:
+
+<script src="https://gist.github.com/1988020.js"> </script>
+
+For more detailed explanations of what each individual command means, please consult the <a href="http://upstart.ubuntu.com/cookbook/">Upstart Cookbook</a>.
+
+There's a lot going on here so we'll take it a few lines at a time. The first three stanzas <em>description</em>, <em>start</em>, and <em>stop</em> should be rather self explanatory.
+
+The two <em>restart</em> lines are what tell Upstart that it needs to try to keep the process running. In this case if 5 restarts happen in 20 minutes then something is very wrong and needs fixing. I chose this broad window due to the time it takes for a Resque worker to load the Rails environment before running. Tweak to your config as necessary.
+
+One of the beauties of Upstart is that it understands running multiple instances of single service through the <em>instance</em> clause. With this clause, instead of having multiple resque.conf files filling up /etc/init, running multiple instances of a service merely requires a parameter, in this case <em>ID</em>, which Upstart will use as a unique identifier to manage the running process.
+
+The <em>script</em> stanza is where we define how the process itself is run. Everything in this block is bash and is run in its own process. In this script, we simply <em>exec</em> our usual <em>rake environment resque:work</em> with the required environment variables as with any other management solution. As the version of Upstart that comes with Ubuntu 10.04 doesn't yet support running processes as users other than root we have to explicitly set permissions and run the Resque worker as another user. If you're already running Upstart 1.4 or later, you can use <em>setuid</em> and <em>setguid</em>. When we upgrade to Ubuntu 12.04 I'll update this post with the changes.
+
+The duplicate pidfile handling in this <em>script</em> block is required for our monitoring to properly watch for each running Resque worker. This script is also working around a timing issue in the current version of Resque (<a href="https://github.com/defunkt/resque/pull/529">Pull Request #529</a>). So, to keep our monitoring tool from going haywire while Resque workers restart, we first write out the pid of the Upstart script process (through <em>$$</em>). We then tell Resque to write out its pid out to <em>PIDFILE</em> once it's loaded, replacing the pid of the now defunct Upstart process and allowing monitoring to pick up the actual Resque process for memory and cpu load monitoring.
+
+You run your Resque worker with one simple command:
+
+<code>start resque ID=0</code>
+
+If you need to have more Resque workers running, increment ID and run the command again. As long as ID is different for each run, Upstart will treat each call as a new process and manage it accordingly. Once you have your Resque workers running, it's time to configure monitoring.
+
+<h2>Monit</h2>
+
+The only thing Upstart doesn't do that's vitally important to any production environment is downtime alerting. While the <em>respawn limit</em> stanza ensures that Upstart doesn't get into an infinite loop trying to restart a broken service, Upstart will not warn you when it decides to stop restarting. <a href="http://mmonit.com/monit/">Monit</a> adds this layer of security to your upstart configs. I know I mentioned Monit in the first paragraph of this post in the list of tools that don't quite do what's needed, and I should clarify what I meant about Monit. Basically, we were never able to get Monit to manage <strong>and</strong> monitor the Resque workers, mainly because at the time Resque did not write out it's own pidfile, and thus Monit had no way of finding the process. Resque has since added the PIDFILE parameter which should make pure Monit solutions easier if you prefer to go that way. That said, Monit is, in my opinion, the best single-server monitoring tool around, which is why we've chosen it for monitoring the Resque workers, and why I recommend it no matter how you're running your Resque workers.
+
+Our current Monit config is the following (it's ERB and is pulled directly from our Chef configuration):
+
+<script src="https://gist.github.com/2004617.js"> </script>
+
+You'll notice that we're technically managing our processes in Upstart <strong>through</strong> Monit. It is possible to put Monit in "monitoring only" mode here, removing <em>start program</em> and <em>stop program</em> and having Monit only alert when things go down. Doing so will require you to figure out another way of restarting your workers as needed, such as a Rake task that sends SIGQUIT to all current workers known to Resque. We've chosen to use Monit to restart our workers due to the ease in which it is done, a single command -- <em>monit -g resque restart</em> -- restarts all currently defined workers. If this setup gets untenable I'll update this post as such.
+
+There is one minor issue with this setup related to the PID swapping described above. Every time you restart the Resque group you will get emails for each Resque job's "Action Done" event as well as a PID swapping alert "PID Changed" when Resque finishes loading and finally writes out its pid. When the Resque pull request gets applied, the PID swapping errors should go away, but I don't think it's possible to stop the "Action Done" emails without halting other potentially important emails for other services you might be monitoring. I'm up for suggestions or ideas.
+
+And that's it! You have Resque running under Upstart and monitored by Monit. While that was a lot of discussion over a couple of configuration lines, there's a lot of underlying knowledge required to make the most use of these too tools. Hopefully I've covered enough for you to be comfortable working with this setup.
+

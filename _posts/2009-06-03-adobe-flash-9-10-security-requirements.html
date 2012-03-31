@@ -1,0 +1,35 @@
+---
+layout: post
+title: Adobe Flash 9 & 10 Security Requirements
+tags:
+- flash
+- programming
+status: publish
+type: post
+published: true
+meta:
+  _edit_last: '2'
+---
+For those of us messing and working in Flash, the transition from Flash 8 through to Flash 10 have been rife with some major changes in the security model that allows a local Flash application to communicate with the outside world. Adobe, knowing that these are big changes, had its developers write <a href="http://www.adobe.com/devnet/flashplayer/articles/fplayer9_security.html">pages</a>, <a href="http://www.adobe.com/devnet/flashplayer/articles/fplayer10_security_changes.html">pages</a>, and <a href="http://www.adobe.com/devnet/flashplayer/articles/fplayer10_security_changes_02.html">pages</a> of documentation describing the where what how and why of these updates. 
+
+Problem is, it's very hard to find the simple How-Tos for common situations in all this text. I spent many days scouring and tinkering to figure out the security solution to my application: a flash-based video viewer that would connect into a server and display Motion-JPEG frames that get streamed in. 
+
+Hopefully I'll help save someone else the same hours of research and playing with this problem. My solution is such:
+
+You first need up a simple service on the server you want to connect into that serves the crossdomain.xml content that defines your security policies.
+
+I use a modified version of the service found here: <a href="http://www.lightsphere.com/dev/articles/flash_socket_policy.html">http://www.lightsphere.com/dev/articles/flash_socket_policy.html</a>. It's updated to be a full Daemon process, so you need Proc::Daemon and Proc::PID::File installed. 
+
+<script src="http://gist.github.com/123110.js"></script>
+
+Please note:
+
+<blockquote>
+  &lt;site-control permitted-cross-domain-policies="all"/&gt;
+</blockquote>
+
+is the required addition to make this script work with Flash 10. Also, if you are worried about corporate firewalls blocking ports < 1000, simply change $port to something bigger, and add the following to your Flash client:
+
+<script src="http://gist.github.com/123117.js"></script>
+
+And you're good to go!
