@@ -1,3 +1,3 @@
 source :rubygems
 
-gem "jekyll"
+gem "jekyll", :git => "git://github.com/jameskilton/jekyll.git"
