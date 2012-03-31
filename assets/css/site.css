@@ -87,3 +87,7 @@ code {
   margin-bottom: 10px;
   line-height: 1.5;
 }
+
+.archive .row.month {
+  margin-bottom: 10px;
+}
