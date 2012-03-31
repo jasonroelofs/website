@@ -8,13 +8,19 @@ status: publish
 type: post
 published: true
 ---
-A feature I realized would be very helpful to have in <a href="http://github.com/jameskilton/rbpluslpus">rb++</a> is a debugging console. Basically, I wanted the ability to drop into an irb session and have available to me the internals of rb++ and rbgccxml, all set up for the sources I've specified for the given extension. 
+<p>
+A feature I realized would be very helpful to have in <a href="http://github.com/jameskilton/rbpluslpus">rb++</a> is a debugging console. Basically, I wanted the ability to drop into an irb session and have available to me the internals of rb++ and rbgccxml, all set up for the sources I've specified for the given extension.
+</p>
 
-Turns out, this is a lot harder to figure out than it would initially seem. The irb code is quite complex and nothing there is documented in any way shape or form. Also, searches around the Internet came back with results that were some six years old, and while helpful, did not pertain to my particular case. 
+<p>
+Turns out, this is a lot harder to figure out than it would initially seem. The irb code is quite complex and nothing there is documented in any way shape or form. Also, searches around the Internet came back with results that were some six years old, and while helpful, did not pertain to my particular case.
+</p>
 
+<p>
 Then I remembered that <a href="http://rubyforge.org/projects/ruby-debug/">ruby-debug</a> does exactly what I'm looking for. A quick glance in that code got me the code snippet I needed.
+</p>
 
-<pre lang="ruby">
+<pre><code data-language="ruby">
 require 'irb'
 
 module IRB # :nodoc:
@@ -26,7 +32,7 @@ module IRB # :nodoc:
       ARGV.replace(args)
       @__initialized = true
     end
-    
+
     workspace = WorkSpace.new(binding)
 
     irb = Irb.new(workspace)
@@ -39,22 +45,32 @@ module IRB # :nodoc:
     end
   end
 end
-</pre>
+</code></pre>
 
+<p>
 And it's use is quite simple. When you want to drop into an irb session, you simply do
+</p>
 
-<pre lang="ruby">
+<pre><code data-language="ruby">
 IRB.start_session(binding)
-</pre>
+</code></pre>
 
-and you will have a code prompt with all data available at your finger-tips. 
+<p>
+and you will have a code prompt with all data available at your finger-tips.
+</p>
 
+<p>
 <a href="http://github.com/jameskilton/rbplusplus/commit/ebb28d290ef6c0e2b7a71032f14a20c9e5150e26">See the related rb++ commit</a>
+</p>
 
+<p>
 You use this feature in rb++ as follows:
+</p>
 
-<code>
+<pre><code data-language="shell">
 ruby your_extension_file.rb console
-</code>
+</code></pre>
 
+<p>
 From there, start playing around with the parsed source tree using either @parser or self.namespace to get started.
+</p>

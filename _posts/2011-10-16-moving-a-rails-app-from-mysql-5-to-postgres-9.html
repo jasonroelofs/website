@@ -9,73 +9,108 @@ status: publish
 type: post
 published: true
 ---
+<p>
 At <a href="http://bloomfire.com">Bloomfire</a> we recently decided to do a full migration over from MySQL 5 to Postgresql 9. There are a number of reasons for this, including scalability, better feature sets (such as Psql's full text search engine) and getting away from Oracle before we are forced to move. For the sake of this post, detailed reasons aren't important.
+</p>
 
+<p>
 What I've put together here are the few issues we ran into and changes we had to make to get the application working under Postgres. Overall the code changes are minimal as we mostly use ActiveRecord code for communication, and in the places we write SQL directly it was mostly standards compliant. That said here's what we did have to change.
-
-<!--more-->
+</p>
 
 <h4>TEXT and :limit</h4>
 
+<p>
 With MySQL, TEXT fields have a maximum length, and as such MySQL offers multiple types of TEXT fields.  ((<a href="http://dev.mysql.com/doc/refman/5.0/en/storage-requirements.html#id816304">http://dev.mysql.com/doc/refman/5.0/en/storage-requirements.html#id816304</a>)) PostgreSQL's TEXT field will auto-scale the field to fit whatever data it needs to contain.  ((<a href="http://www.postgresql.org/docs/9.1/interactive/datatype.html">http://www.postgresql.org/docs/9.1/interactive/datatype.html</a>))
+</p>
 
+<p>
 <b>Fix:</b> Remove any :limits on TEXT fields.
+</p>
 
 <h4>Type Conversions</h4>
 
+<p>
 MySQL is very loose when it comes to dealing with types. If a field is an integer, you can send in a string and MySQL will convert what's needed, and vice-versa. PostgreSQL however will complain if you pass in the wrong type.
+</p>
 
+<p>
 <b>Fix:</b> Make sure you're using the write types in your queries.
+</p>
 
 <h4>SUM(boolean_filed)</h4>
 
+<p>
 When you ask MySQL to SUM() a boolean field in a query, it happily returns the number of rows that are TRUE. This is because MySQL stores TRUE and FALSE as 1 and 0 respectively, thus SUM is simply a mathematical accumulation. PostgreSQL has a dedicated BOOLEAN column type, so this no longer works.
+</p>
 
+<p>
 <b>Fix:</b> Change your SUM to be explicit about TRUE and FALSE:
+</p>
 
 <code>sum(CASE boolean_field WHEN TRUE THEN 1 ELSE 0 END)</code>
 
 <h4>AS operator</h4>
 
+<p>
 MySQL has an implicit "AS" operator in it's query parser, e.g.
+</p>
 
 <code>select alias.some_column from table_name alias</code>
 
+<p>
 PostgreSQL wants you to use the AS operator.
+</p>
 
+<p>
 <b>Fix:</b> <code>select alias.some_column from table_name AS alias</code>
+</p>
 
 <h4>TIMESTAMP fields</h4>
 
+<p>
 Postgres has much finer precision with TIME fields. Where MySQL works with seconds, Postgres saves down to the microsecond  ((<a href="http://www.postgresql.org/docs/9.1/interactive/datatype-datetime.html">http://www.postgresql.org/docs/9.1/interactive/datatype-datetime.html</a>)).
+</p>
 
 <h4>Primary Key Sequences and resets (for Tests mainly)</h4>
 
+<p>
 Postgres in some cases doesn't auto-reset your primary key sequences. When this happens you'll run into tests that die with a unique key constraint error. Still working on the best way to solve this but for now you can do the following for each table in which you need the sequence reset:
+</p>
 
 <code>ActiveRecord::Base.reset_pk_sequence!(table_name)</code>
 
-
 <h4>SQL Function Equivalents</h4>
 
+<p>
 <b>MySQL:</b> WEEK(), MONTH(), YEAR()
 <b>PostgreSQL:</b> EXTRACT({day, month, week, year} FROM TIMESTAMP '...')  ((<a href="http://www.postgresql.org/docs/9.1/interactive/datatype-datetime.html">http://www.postgresql.org/docs/9.1/static/functions-datetime.html</a>))
+</p>
 
+<p>
 <b>MySQL:</b> LIMIT offset, row_count
 <b>PostgreSQL:</b> LIMIT row_count OFFSET offset
+</p>
 
 <h4>GROUP BY</h4>
 
+<p>
 It appears that MySQL does extra work underneath when dealing with GROUP BY. I ran into an issue where Postgres was complaining about missing fields in GROUP BY clauses. After doing some research, it seems that Postgres is strictly following the SQL spec where MySQL is not, so where MySQL auto-fills in the required GROUP BY columns if they are missing and can be inferred, PostgreSQL requires that you specify every GROUP BY column required in the query.
+</p>
 
 <h4>ORDER</h4>
 
+<p>
 Where MySQL defaults an ORDER BY to be the ids of the rows found, Postgres has <em>undefined</em> default sort order.  ((<a href="http://www.postgresql.org/docs/9.1/interactive/queries-order.html">http://www.postgresql.org/docs/9.1/interactive/queries-order.html</a>)) If your tests or code expect a certain order and the query doesn't have an ORDER BY clause, your code will be nondeterministic. Adjust accordingly.
+</p>
 
 <h4>Data Migration</h4>
 
+<p>
 The easiest way to move data over from MySQL to PostgreSQL is to use ActiveRecord. While MySQL does have a "--postgres" option in mysqldump, it doesn't really do the job it needs to, requiring some text manipulation of the data before PostgreSQL will accept it:
+</p>
 
 <script src="https://gist.github.com/1232407.js"> </script>
 
+<p>
 Other than that, and changing to the postgres gem, the conversion to PostgreSQL has been relatively painless so far. I'll update this post if more issues come up.
+</p>
