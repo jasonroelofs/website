@@ -4,7 +4,7 @@
 auto:         true
 server:       true
 server_port:  8080
-pygments:     true
+pygments:     false
 pagination:   10
 permalink:    /:year/:month/:day/:title/
 exclude:
