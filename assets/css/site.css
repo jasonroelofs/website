@@ -72,4 +72,18 @@ body {
 	border:1px solid #4C964D;
 	color:#FFF;
 }
-	
+
+/* =================================================================== */
+
+h2.title {
+  border-bottom: 3px solid #808080;
+  margin-bottom: 10px;
+}
+
+code {
+  display: block;
+  background-color: inherit;
+  margin: 0 1.5em 1.25em 1.5em;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
