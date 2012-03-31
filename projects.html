@@ -1,6 +1,25 @@
 ---
-layout: default
+layout: with_about
 title: Projects
 ---
 
-These are my projects
+{% for project in site.projects %}
+  <div class="project">
+    <div class="links">
+      <span>
+        <a class="btn info" href="{{ project.install_url }}">Install</a>
+      </span>
+
+      <span>
+        <a class="btn primary" href="{{ project.website }}">Website</a>
+      </span>
+
+      <span>
+        <a class="btn" href="{{ project.github_url }}">Source</a>
+      </span>
+    </div>
+
+    <h2 class="title">{{ project.name }}</h2>
+    <div class="description">{{ project.description }}</div>
+  </div>
+{% endfor %}

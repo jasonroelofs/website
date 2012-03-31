@@ -91,3 +91,12 @@ code {
 .archive .row.month {
   margin-bottom: 10px;
 }
+
+.project {
+  margin-bottom: 3em;
+}
+
+.project .links {
+  float: right;
+  margin-top: 5px;
+}

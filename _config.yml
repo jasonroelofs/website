@@ -26,3 +26,43 @@ author:
   email: "jasongroelofs@gmail.com"
   github: "jameskilton"
 
+projects:
+  - name: SimpleAWS
+    slug: simple_aws
+    github_url: https://github.com/jameskilton/simple_aws
+    description:
+      "Small, simple, and forward compatible AWS communication library"
+    website: http://rubydoc.info/github/jameskilton/simple_aws/master/frames
+    install_url: https://rubygems.org/gems/simple_aws
+
+  - name: Rice
+    slug: rice
+    github_url: https://github.com/jameskilton/rice
+    description:
+      "Ruby Interface for C++ Extensions. Expose your C++ classes to Ruby through a simple DSL"
+    website: http://rice.rubyforge.org
+    install_url: https://rubygems.org/gems/rice
+
+  - name: rbgccxml
+    slug: rbgccxml
+    github_url: https://github.com/jameskilton/rbgccxml
+    description:
+      "Ruby library to parse and query C++ header files using GCCXML"
+    website: http://rbplusplus.rubyforge.org/rbgccxml
+    install_url: https://rubygems.org/gems/rbgccxml
+
+  - name: rb++
+    slug: rbplusplus
+    github_url: https://github.com/jameskilton/rbplusplus
+    description:
+      "Combines rbgccxml and rice to automatically generate Ruby extensions from C++ code"
+    website: http://rbplusplus.rubyforge.org
+    install_url: https://rubygems.org/gems/rbplusplus
+
+  - name: gccxml_gem
+    slug: gccxml_gem
+    github_url: https://github.com/jameskilton/gccxml_gem
+    description:
+      "Ruby wrapper around the GCC-XML library. Includes binary installs of GCC-XML"
+    website: http://rubygems.org/gems/gccxml_gem
+    install_url: https://rubygems.org/gems/gccxml_gem
