@@ -1,12 +1,29 @@
 ---
 layout: default
 ---
-
 <div class="row span15">
   <div class="span4">
-    <p>
-    Post information
-    </p>
+    <div>
+      <p>Published on {{ page.date | date: "%B %d, %Y" }}</p>
+      <p>
+        {% for tag in page.tags %}
+          <span class="label info">
+            {{ tag }}
+          </span>
+          &nbsp;
+        {% endfor %}
+      </p>
+    </div>
+
+    <div class="buttons">
+      {% if page.previous %}
+      <a class="btn" href="{{ page.previous.url }}">&laquo; Previous</a>
+      {% endif %}
+
+      {% if page.next %}
+      <a class="btn" href="{{ page.next.url }}">Next &raquo;</a>
+      {% endif %}
+    </div>
   </div>
 
   <div class="span10">

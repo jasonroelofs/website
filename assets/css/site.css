@@ -101,3 +101,11 @@ code {
 ul li {
   color: inherit;
 }
+
+.buttons {
+  margin-top: 2em;
+}
+
+.label.info {
+  background-color: #0069D6;
+}
