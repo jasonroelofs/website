@@ -3,7 +3,7 @@
  *
  * @author Matthew King
  * @author Craig Campbell
- * @version 1.0.2
+ * @version 1.0.3
  */
 Rainbow.extend('shell', [
     /**
@@ -37,7 +37,7 @@ Rainbow.extend('shell', [
         'pattern': /\#[\s\S]*?$/gm
     },
     {
-        'name': 'meta.function',
+        'name': 'storage.function',
         'pattern': /(.+?)(?=\(\)\s{0,}\{)/g
     },
     /**

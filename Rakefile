@@ -11,4 +11,6 @@ task :update_rainbow do
   cp File.join(rainbow_dir, "js", "rainbow.min.js"), File.join(assets_dir, "js")
   cp File.join(rainbow_dir, "js", "language", "ruby.js"), File.join(assets_dir, "js")
   cp File.join(rainbow_dir, "js", "language", "shell.js"), File.join(assets_dir, "js")
+  cp File.join(rainbow_dir, "js", "language", "generic.js"), File.join(assets_dir, "js")
+  cp File.join(rainbow_dir, "js", "language", "c.js"), File.join(assets_dir, "js")
 end

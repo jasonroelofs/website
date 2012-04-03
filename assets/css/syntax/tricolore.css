@@ -2,7 +2,7 @@
  * Tricolore theme
  *
  * @author Jean Nicolas
- * @version 1.0
+ * @version 1.0.1
  */
 pre {
     background: #FFF;
@@ -25,7 +25,7 @@ pre .comment {
 	font-style: italic;
 }
 
-pre .constant, pre .integer {
+pre .constant {
     color: #18838A;
 	font-weight: bold;
 }
@@ -43,7 +43,7 @@ pre .keyword, pre .selector {
 	font-weight: bold;
 }
 
-pre .parent {
+pre .inherited-class {
     font-style: italic;
 }
 
