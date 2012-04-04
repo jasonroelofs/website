@@ -40,7 +40,7 @@ projects:
     slug: rice
     github_url: https://github.com/jameskilton/rice
     description:
-      "Ruby Interface for C++ Extensions. Expose your C++ classes to Ruby through a simple DSL"
+      "Ruby Interface for C++ Extensions. Expose your C++ classes to Ruby through a simple DSL<br/><br/>Mailing list is at <a href=\"mailto:rice@librelist.com\">rice@librelist.com</a>. Your first email will be used for registration and discarded.<br/>View the <a href=\"http://librelist.com/browser/rice/\">mailing list archives</a>."
     website: http://rice.rubyforge.org
     install_url: https://rubygems.org/gems/rice
 
