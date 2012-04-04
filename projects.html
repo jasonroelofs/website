@@ -1,25 +1,45 @@
 ---
-layout: with_about
-title: Projects
+layout: default
 ---
 
-{% for project in site.projects %}
-  <div class="project">
-    <div class="links">
-      <span>
-        <a class="btn info" href="{{ project.install_url }}">Install</a>
-      </span>
+<div class="row span15">
+  <div class="span4">
+    <h2 class="title">Projects</h2>
 
-      <span>
-        <a class="btn primary" href="{{ project.website }}">Website</a>
-      </span>
+    <p>
+    These are the main open source projects I run.
+    </p>
 
-      <span>
-        <a class="btn" href="{{ project.github_url }}">Source</a>
-      </span>
-    </div>
+    <p>
+    Use the "Source" button to go to that project's repository.
+    All bug reports should go to that project's appropriate Github Issues page.
+    </p>
 
-    <h2 class="title">{{ project.name }}</h2>
-    <div class="description">{{ project.description }}</div>
+    <p>
+    All projects are hosted on <a href="http://github.com">Github</a>.
+    </p>
   </div>
-{% endfor %}
+
+  <div class="span10">
+    {% for project in site.projects %}
+      <div class="project">
+        <div class="links">
+          <span>
+            <a class="btn info" href="{{ project.install_url }}">Install</a>
+          </span>
+
+          <span>
+            <a class="btn primary" href="{{ project.website }}">Website</a>
+          </span>
+
+          <span>
+            <a class="btn" href="{{ project.github_url }}">Source</a>
+          </span>
+        </div>
+
+        <h2 class="title">{{ project.name }}</h2>
+        <div class="description">{{ project.description }}</div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
