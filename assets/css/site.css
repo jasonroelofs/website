@@ -117,3 +117,7 @@ h2 a {
 h2 a:hover {
   color: inherit;
 }
+
+.previous_post {
+  text-align: right;
+}.
