@@ -109,3 +109,11 @@ ul li {
 .label.info {
   background-color: #0069D6;
 }
+
+h2 a {
+  color: inherit;
+}
+
+h2 a:hover {
+  color: inherit;
+}
