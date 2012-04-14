@@ -2,7 +2,6 @@
 layout: post
 title: How Rice Works
 tags:
-  - everything!
   - programming
   - rice
   - ruby
@@ -87,15 +86,15 @@ define_class(
 }
 </code></pre>
 
-This method starts out creating a new Rice::Class with the given name, making it a subclass of Object (aka a top-level Class, emulating what Ruby itself does). A quick jump into Class.cpp shows us that define_class(char*, VALUE) simply forwards off to the Ruby API call rb_define_class, then takes the resulting VALUE and wraps it into a Rice::Class. 
+This method starts out creating a new Rice::Class with the given name, making it a subclass of Object (aka a top-level Class, emulating what Ruby itself does). A quick jump into Class.cpp shows us that define_class(char*, VALUE) simply forwards off to the Ruby API call rb_define_class, then takes the resulting VALUE and wraps it into a Rice::Class.
 
 Rice then undefines #alloc and #initialize to prepare the class for Rice's own type management (to be discussed later). The third line of this method is what actually binds this new class to the C++ type, binding it as a top-level class (Data_Type::bind is templated to the superclass type, so void in this case).
 
 <h4>Data_Type binding</h4>
 
-Probably the most confusing, and at the same time most important, aspect of Rice is how it manages C++ types and their link into the Ruby world. Every C++ class that's to be wrapped into Ruby must be bound to a Ruby class which is done in the static method Data_Type::bind (implemented in Data_Type.ipp). This logic forms the core of how Rice does automatic conversions from C++ types to Ruby types and vis-versa. 
+Probably the most confusing, and at the same time most important, aspect of Rice is how it manages C++ types and their link into the Ruby world. Every C++ class that's to be wrapped into Ruby must be bound to a Ruby class which is done in the static method Data_Type::bind (implemented in Data_Type.ipp). This logic forms the core of how Rice does automatic conversions from C++ types to Ruby types and vis-versa.
 
-To start, every Data_Type&lt;T&gt; has a static pointer to a Ruby class (Data_Type&lt;T&gt;::klass_). After checking that this C++ class isn't already bound to another Ruby class, bind() registers the Ruby class with the Ruby GC and sets up a Caster between this C++ type and the Ruby class (to be discussed later). 
+To start, every Data_Type&lt;T&gt; has a static pointer to a Ruby class (Data_Type&lt;T&gt;::klass_). After checking that this C++ class isn't already bound to another Ruby class, bind() registers the Ruby class with the Ruby GC and sets up a Caster between this C++ type and the Ruby class (to be discussed later).
 
 We've now got our C++ class Generator properly bound to the Ruby class Generator and can continue.
 
@@ -152,7 +151,7 @@ From this point, Rice needs to make a very important distinction on the method b
 
 Opening up detail/wrap_function.ipp you'll see a very long file full of very repetitive method definitions. The key here is this method uses templates to match the passed in function pointer to one of Auto_Function_Wrapper (static functions) or Auto_Member_Function_Wrapper (a class instance method). Due to how Auto_{,Member}_Function_Wrapper works, wrap_function also has to have template specifications for functions with a return type and functions with void, as well as specifications to handle const and non-const function pointers.
 
-To continue from here we need to understand how Rice actually hooks into Ruby. Glancing in detail/Auto_Function_Wrapper.hpp  we'll find template-overload classes similar to what's in wrap_function. These classes are the core that handle argument and return type management as well as taking execution from Ruby and passing it into the related C++ function or method. What we're going to focus on here is the ::call static method, though we'll get to the details of this method's implementations later. 
+To continue from here we need to understand how Rice actually hooks into Ruby. Glancing in detail/Auto_Function_Wrapper.hpp  we'll find template-overload classes similar to what's in wrap_function. These classes are the core that handle argument and return type management as well as taking execution from Ruby and passing it into the related C++ function or method. What we're going to focus on here is the ::call static method, though we'll get to the details of this method's implementations later.
 
 Ruby's API will only take C-style functions with the signature VALUE(*)(...). The Auto_..._Wrapper classes are the glue that gives us a function with this signature:
 
@@ -181,11 +180,11 @@ I'll start this section with the comment block describing define_method_with_dat
 // the method entry.  The form of the method entry differs from ruby
 // version to ruby version, but the concept is the same across all of
 // them.
-// 
+//
 // In Rice, we make use of this by defining a method on a dummy class,
 // then attaching that method to our real class.  The method is a real
 // method in our class, but its origin class is our dummy class.
-// 
+//
 // When Ruby makes a method call, it stores the origin class in the
 // current stack frame.  When Ruby calls into Rice, we grab the origin
 // class from the stack frame, then pull the data out of the origin
@@ -220,7 +219,7 @@ With that, we're done with the wrapping and exposing path through Rice. Now it's
 
 It's time to take a detailed look at this method. In short, once execution enters this method, it's now Rice's job to convert VALUE arguments into the appropriate C++ types, execute the wrapped method / function, then do any required conversion of return values back to VALUEs for Ruby, while also making sure that any exceptions that throw along the way are properly caught and handled (an uncaught exception in C++ will give you a SegmentationFault or a BusError. Always fun to debug).
 
-So, first things first, we need to get back the Auto_..._Wrapper object we saved when we wrapped this function. This is done with the detail::method_data() function, details of which are easily seen and understood in detail/method_data.cpp. With this we run our arguments list through rb_scan_args then run through each argument and check if there's was a default set in the wrapper and if we should use it (Side note: the sanitize&lt;&gt; template is a no-op right now and can be ignored. It's there to attempt to clean out any references or const arguments that may come in to get the base type, but this was causing crashes on other wrappers. For now I assume there's a possibility of a small memory leak here related to reference types). Once all the types are converted it's time to actually call the C++ method or function, and handle the return type. 
+So, first things first, we need to get back the Auto_..._Wrapper object we saved when we wrapped this function. This is done with the detail::method_data() function, details of which are easily seen and understood in detail/method_data.cpp. With this we run our arguments list through rb_scan_args then run through each argument and check if there's was a default set in the wrapper and if we should use it (Side note: the sanitize&lt;&gt; template is a no-op right now and can be ignored. It's there to attempt to clean out any references or const arguments that may come in to get the base type, but this was causing crashes on other wrappers. For now I assume there's a possibility of a small memory leak here related to reference types). Once all the types are converted it's time to actually call the C++ method or function, and handle the return type.
 
 The noticeable difference between Auto_Member_Function_Wrapper and Auto_Function_Wrapper is that Auto_Function_Wrapper has some special handling for the "self" parameter. This functionality is here to support the ability to wrap C functions that are written in an OO way, such as:
 
