@@ -4,3 +4,4 @@ tmp
 Gemfile.lock
 bin
 .bundle
+*sublime*
