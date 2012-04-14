@@ -14,3 +14,14 @@ task :update_rainbow do
   cp File.join(rainbow_dir, "js", "language", "generic.js"), File.join(assets_dir, "js")
   cp File.join(rainbow_dir, "js", "language", "c.js"), File.join(assets_dir, "js")
 end
+
+desc "One-off generate the site"
+task :generate do
+  sh "rm -rf _site"
+  sh "jekyll --no-auto --no-server"
+end
+
+desc "Deploy the website"
+task :deploy => :generate do
+  sh "rsync -rtzq _site/ jameskil@jasonroelofs.com:~/public_html/newsite"
+end
