@@ -32,14 +32,6 @@ layout: default
 
     <hr/>
 
-    <div class="previous_post">
-      {% for prev_post in site.posts limit:1 offset: 1 %}
-      <a href="{{ prev_post.url }}">{{ prev_post.title }}</a> &raquo;
-      {% endfor %}
-    </div>
-
-    <hr/>
-
     {% include disqus.html %}
   </div>
 </div>
