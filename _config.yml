@@ -22,6 +22,9 @@ include:
 title:        "Forty-Two"
 url:          "http://jasonroelofs.com"
 
+disqus:
+  shortname: "jasonroelofs"
+
 author:
   name: "Jason Roelofs"
   email: "jasongroelofs@gmail.com"
