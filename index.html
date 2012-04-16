@@ -26,6 +26,7 @@ layout: default
   <div class="span10">
     <div class="current_post">
       {% for post in site.posts limit:1 %}
+        {% assign current_post = post %}
         {% include post.html %}
       {% endfor %}
     </div>

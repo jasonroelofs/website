@@ -29,6 +29,7 @@ layout: default
   <div class="span10">
     {{ content }}
     <hr/>
+    {% assign current_post = page %}
     {% include disqus.html %}
   </div>
 </div>
