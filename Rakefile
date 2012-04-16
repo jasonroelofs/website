@@ -23,5 +23,5 @@ end
 
 desc "Deploy the website"
 task :deploy => :generate do
-  sh "rsync -rtzq _site/ jameskil@jasonroelofs.com:~/public_html/newsite"
+  sh "rsync -rtzq _site/ jameskil@jasonroelofs.com:~/public_html/"
 end
