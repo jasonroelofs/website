@@ -194,7 +194,7 @@ I'll start this section with the comment block describing define_method_with_dat
 
 Bear with me here as I still have a hard time keeping this straight in my mind. To help understand what exactly is going on here, I've made a graph showing all the relevant links between Rice, C++ and Ruby as made by this method.
 
-<img src="http://jameskilton.com/blog/wp-content/uploads/2010/02/method_data.png" alt="Graph showing how Rice hooks into Ruby" />
+<img src="http://jasonroelofs.com/blog/wp-content/uploads/2010/02/method_data.png" alt="Graph showing how Rice hooks into Ruby" />
 
 The steps define_method_with_data takes:
 

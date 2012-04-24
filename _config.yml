@@ -28,20 +28,20 @@ disqus:
 author:
   name: "Jason Roelofs"
   email: "jasongroelofs@gmail.com"
-  github: "jameskilton"
+  github: "jasonroelofs"
 
 projects:
   - name: SimpleAWS
     slug: simple_aws
-    github_url: https://github.com/jameskilton/simple_aws
+    github_url: https://github.com/jasonroelofs/simple_aws
     description:
       "Small, simple, and forward compatible AWS communication library"
-    website: http://rubydoc.info/github/jameskilton/simple_aws/master/frames
+    website: http://rubydoc.info/github/jasonroelofs/simple_aws/master/frames
     install_url: https://rubygems.org/gems/simple_aws
 
   - name: Rice
     slug: rice
-    github_url: https://github.com/jameskilton/rice
+    github_url: https://github.com/jasonroelofs/rice
     description:
       "Ruby Interface for C++ Extensions. Expose your C++ classes to Ruby through a simple DSL<br/><br/>Mailing list is at <a href=\"mailto:rice@librelist.com\">rice@librelist.com</a>. Your first email will be used for registration and discarded.<br/>View the <a href=\"http://librelist.com/browser/rice/\">mailing list archives</a>."
     website: http://rice.rubyforge.org
@@ -49,7 +49,7 @@ projects:
 
   - name: rbgccxml
     slug: rbgccxml
-    github_url: https://github.com/jameskilton/rbgccxml
+    github_url: https://github.com/jasonroelofs/rbgccxml
     description:
       "Ruby library to parse and query C++ header files using GCCXML"
     website: http://rbplusplus.rubyforge.org/rbgccxml
@@ -57,7 +57,7 @@ projects:
 
   - name: rb++
     slug: rbplusplus
-    github_url: https://github.com/jameskilton/rbplusplus
+    github_url: https://github.com/jasonroelofs/rbplusplus
     description:
       "Combines rbgccxml and rice to automatically generate Ruby extensions from C++ code"
     website: http://rbplusplus.rubyforge.org
@@ -65,7 +65,7 @@ projects:
 
   - name: gccxml_gem
     slug: gccxml_gem
-    github_url: https://github.com/jameskilton/gccxml_gem
+    github_url: https://github.com/jasonroelofs/gccxml_gem
     description:
       "Ruby wrapper around the GCC-XML library. Includes binary installs of GCC-XML"
     website: http://rubygems.org/gems/gccxml_gem
