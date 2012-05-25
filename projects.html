@@ -24,13 +24,17 @@ layout: default
     {% for project in site.projects %}
       <div class="project">
         <div class="links">
+          {% if project.install_url %}
           <span>
             <a class="btn info" href="{{ project.install_url }}">Install</a>
           </span>
+          {% endif %}
 
+          {% if project.install_url %}
           <span>
             <a class="btn primary" href="{{ project.website }}">Website</a>
           </span>
+          {% endif %}
 
           <span>
             <a class="btn" href="{{ project.github_url }}">Source</a>
