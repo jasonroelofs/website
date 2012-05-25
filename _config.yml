@@ -31,6 +31,12 @@ author:
   github: "jasonroelofs"
 
 projects:
+  - name: RaidIt
+    slug: raidit
+    github_url: https://github.com/jasonroelofs/raidit
+    description:
+      "MMO focused calendar tool for scheduling player, guild, or server events"
+
   - name: SimpleAWS
     slug: simple_aws
     github_url: https://github.com/jasonroelofs/simple_aws
