@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Designing Software
+title: Designing a Rails App Part 1
 published: true
 tags:
   - software
