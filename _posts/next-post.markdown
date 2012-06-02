@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Designing a Rails App Part 2
-subtitle: My starting rules
+title: Rules for Rails App Development
+subtitle: Designing a Rails App Part 2
 published: true
 tags:
   - software
