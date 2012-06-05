@@ -10,7 +10,7 @@ tags:
   - raidit
 ---
 
-[Designing a Rails App Part 1]({% post_url 2012-05-29-designing-a-rails-app-part-1 %})
+If you haven't yet, please read [Designing a Rails App Part 1]({% post_url 2012-05-29-designing-a-rails-app-part-1 %}).
 
 It's well known that starting a project can often be the most difficult phase of the project. You have ideas and probably some preliminary design work, but actually codifying those ideas requires a different thought process and a little bit of motivation. Often, to alieviate the difficulty of starting, you get the typical setup steps taken care of: generating a new Rails template, getting the database set up, choosing your favorite test framework, etc, giving you a familiar framework in which you can start your new project. These are the steps I need to **not** take if I'm going to understand where my pain is and how to better design and build an application.
 
@@ -48,7 +48,7 @@ I have experienced the pain of mocking absolutely everything, which I henseforth
 
 In my quest to figure out what actually works, I'm going to take the exact opposite stance for raidit: don't mock anything that I own. This has a number of benefits: the code itself is exercised instead of a mock, the tests will tell me if something isn't implemented, and test setup will tell me very quickly if I have too many dependencies for a given method or object. One potential issue to this stance is that it doesn't exactly adhere to the "fail quick and only in one place" idea of testing, in that if a method on a domain model breaks, the tests for the interactors that use that method will all fail. I don't forsee this being a big problem but if it doesn't become more painful than I'm expecting I shall make the appropriate changes.
 
-When I say "mock the code I own", I am takling about the application and not Rails. When I added Rails to raidit, I initially treated the controller code as part of the application, not using any mock. This led to test pain when the controller tests needed to know explicit details of the Interactors and the domain models themselves, which felt like way too much knowledge for a delivery mechanism. Thus I am now using mocks for controller tests. The acceptance tests run the full stack, ensuring my mocks are not hurting me through false positives.
+When I say "mock the code I own", I am talking about the application and not Rails. When I added Rails to raidit, I initially treated the controller code as part of the application, not using any mocks. This led to test pain when the controller tests needed to know explicit details of the Interactors and the domain models themselves, which felt like way too much knowledge for a delivery mechanism. Thus I am now using mocks for controller tests. The acceptance tests run the full stack, ensuring my mocks are not hurting me through false positives.
 
 ## No persistence at all, anywhere
 
