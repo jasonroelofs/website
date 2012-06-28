@@ -120,4 +120,18 @@ h2 a:hover {
 
 .previous_post {
   text-align: right;
-}.
+}
+
+.series {
+  margin-top: 2em;
+  background-color: #eee;
+  padding: 10px;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+}
+
+.series li {
+  margin-bottom: 5px;
+  margin-left: -5px;
+}

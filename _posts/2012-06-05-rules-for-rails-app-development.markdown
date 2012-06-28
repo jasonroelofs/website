@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Rules for Rails App Development
-subtitle: Designing a Rails App Part 2
 published: true
+series: Designing a Rails App
 tags:
   - software
   - architecture

@@ -24,6 +24,26 @@ layout: default
       <a class="btn" href="{{ page.next.url }}">Next &raquo;</a>
       {% endif %}
     </div>
+
+    {% if page.series %}
+    {% assign series_name = page.series %}
+    <div class="series">
+      <p>This post is a part of the <strong>{{ page.series }}</strong> series:</p>
+      <ul>
+        {% for next_post in site.posts reversed %}
+          {% if next_post.series == series_name %}
+            <li>
+              {% if next_post.title == page.title %}
+                <em>{{ next_post.title }}</em>
+              {% else %}
+                <a href="{{ next_post.url }}">{{ next_post.title }}</a>
+              {% endif %}
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
   </div>
 
   <div class="span10">

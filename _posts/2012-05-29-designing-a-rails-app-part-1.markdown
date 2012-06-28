@@ -2,6 +2,7 @@
 layout: post
 title: Designing a Rails App Part 1
 published: true
+series: Designing a Rails App
 tags:
   - software
   - architecture
