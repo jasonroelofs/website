@@ -1,0 +1,89 @@
+---
+layout: post
+title: Abstract Persistence Logic
+published: true
+series: Designing a Rails App
+tags:
+  - software
+  - design
+  - persistance
+  - raidit
+---
+
+Nothing slows down test execution than having to talk to an external service. Tests that run purely in memory are the fastest tests possible.
+
+Choosing a persistence layer at the start of a project is almost always a mistake. The beginning of a project is the point of most ignorance, and the part of your app that is the least known is the domain model and what will actually need to be persisted. Also, as you develop you may find that your choice of persistence library is no longer the most optimal for the solution at hand.
+
+Have you ever tried to replace ActiveRecord code in a typical Rails App with something else?
+
+Why are you exposing your database tables to the user via your view? Why are you coupling your **entire** code base with your persistence implementation and database choice?
+
+If there's anything you take out of Uncle Bob's talk (see [Part 1]({% post_url 2012-05-29-designing-a-rails-app-part-1 %})), is that you need to be well aware what parts of your application are implementation details and what parts are your actual implementation. I think I'm safe in saying that if you're building an application to be consumed via the web, persistance is always an implementation detail. The application *does not* and *should not* care how information is stored. It needs the information to work with it and that's it.
+
+On top of all this, you should be developing with a top-down approach, so the last thing you should ever think about for any story is how and what data is persisted, but why limit yourself? As Uncle Bob says, good architecture is defined by the fewest decisions made, so what do we need to do to ensure our application doesn't become ActiveRecord spaghetti coupling again? In short how do you abstract out persistence (ActiveRecord) from app logic?
+
+It's not hard to find many different patterns developed over decades that solve this problem in a myriad of different ways and for all sorts of different systems and languages. Most of the best can be found in Martin Fowler's book [Patterns of Enterprise Application Architecture](http://martinfowler.com/books/eaa.html). The two I spent the most time investigating are the [Repository](http://martinfowler.com/eaaCatalog/repository.html) and the [Data Mapper](http://martinfowler.com/eaaCatalog/dataMapper.html) as well as a number of existing Ruby libraries implementing these patterns.
+
+### Repository
+
+### DataMapper
+
+
+### The Raidit Choice
+
+In choosing the pattern for raidit I needed to fit two criteria: super stupidly simple and pluggable so that I can develop and test the application using only in-memory data. After evaluating various Ruby libraries for each pattern, including the work that's coming out of the DataMapper2 project, I realized that I could build one myself for basically no effort. I ended up with the following:
+
+<pre><code data-language="ruby">
+class Repository
+
+  ##
+  # Add a mapping to this repository. This will add to the existing known
+  # set of mappings. To start the mapping list anew, use +.reset!+ first.
+  ##
+  def self.configure(options = {})
+    @mappings ||= {}
+    @mappings.merge!(options)
+  end
+
+  ##
+  # Clear out all known mappings
+  ##
+  def self.reset!
+    @mappings = {}
+  end
+
+  ##
+  # Find the defined mapping for the given Domain Model class
+  ##
+  def self.for(klass)
+    @mappings[klass] || @mappings[klass.to_s]
+  end
+
+end
+</code></pre>
+
+It's usage is equally simple. There's a two step process: 1) configure a repository object for each domain model class you have
+
+<pre><code data-language="ruby">
+  # Using strings here so that there isn't a hard dependency on
+  # the class itself.
+  Repository.configure(
+    "User"        => InMemory::UserRepo.new,
+    "Guild"       => InMemory::GuildRepo.new,
+    "Character"   => InMemory::CharacterRepo.new,
+    "Raid"        => InMemory::RaidRepo.new,
+    "Signup"      => InMemory::SignupRepo.new,
+    "Permission"  => InMemory::PermissionRepo.new
+  )
+</code></pre>
+
+All current in-memory repository objects are in a single file: [https://github.com/jasonroelofs/raidit/blob/master/app/repositories/in_memory.rb](https://github.com/jasonroelofs/raidit/blob/master/app/repositories/in_memory.rb), and their individual APIs simply evolve and grow according to the needs of the application.
+
+2) Request that repository object when you need to pass information back and forth.
+
+<pre><code data-language="ruby">
+  user = User.new
+  Repository.for(User).save(user)
+</code></pre>
+
+When I get to the point of requiring actual persistence, I'll be able to take the resulting InMemory API and very quickly build a wrapper for whatever persistence layer I choose. The biggest bonus of this is not the pluggable-ness but the fact that my tests can continue to use the in-memory repositories, staying crazy fast, and I'll have a small, self-contained test suite that does hit a database, so the overall test slowdown is minimal.
