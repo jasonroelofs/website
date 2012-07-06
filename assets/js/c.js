@@ -3,12 +3,13 @@
  *
  * @author Daniel Holden
  * @author Craig Campbell
- * @version 1.0.2
+ * @version 1.0.6
  */
 Rainbow.extend('c', [
     {
+        'name': 'meta.preprocessor',
         'matches': {
-            2: [
+            1: [
                 {
                     'matches': {
                         1: 'keyword.define',
@@ -21,6 +22,10 @@ Rainbow.extend('c', [
                     'pattern': /endif/g
                 },
                 {
+                    'name': 'constant.numeric',
+                    'pattern': /\d+/g
+                },
+                {
                     'matches': {
                         1: 'keyword.include',
                         2: 'string'
@@ -29,7 +34,7 @@ Rainbow.extend('c', [
                 }
             ]
         },
-        'pattern': /(\#)([\S\s]*?)$/gm
+        'pattern': /\#([\S\s]*?)$/gm
     },
     {
         'name': 'keyword',
@@ -45,13 +50,13 @@ Rainbow.extend('c', [
             3: 'storage.type',
             4: 'entity.name.function'
         },
-        'pattern': /\b((un)?signed|const)?\s?(void|char|short|int|long|float|double)\*?(\s(\w+)(?=\())?/g
+        'pattern': /\b((un)?signed|const)? ?(void|char|short|int|long|float|double)\*? +((\w+)(?= ?\())?/g
     },
     {
         'matches': {
             2: 'entity.name.function'
         },
-        'pattern': /(\w|\*)(\s(\w+)(?=\())?/g
+        'pattern': /(\w|\*) +((\w+)(?= ?\())/g
     },
     {
         'name': 'storage.modifier',
@@ -60,27 +65,5 @@ Rainbow.extend('c', [
     {
         'name': 'support.type',
         'pattern': /\b(struct|union|enum)\b/g
-    },
-
-    /**
-     * reset constants
-     */
-    {
-        'name': 'variable',
-        'pattern': /\b[A-Z0-9_]{2,}\b/g
-    },
-
-    /**
-     * this rule is very iffy, but it seems like textmate
-     * highlights anything like this
-     *
-     * using 4 or more characters to avoid keywords intersecting
-     * such as if(  and for(
-     */
-    {
-        'matches': {
-            1: 'support.function.call'
-        },
-        'pattern': /(\w{4,})(?=\()/g
     }
 ]);
