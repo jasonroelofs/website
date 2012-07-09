@@ -10,34 +10,23 @@ tags:
   - raidit
 ---
 
-Nothing slows down test execution than having to talk to an external service. Tests that run purely in memory are the fastest tests possible.
+I've come to realize over my years of Rails development that there's nothing more painful than a slow test suite. Slow tests encourage you to not run them as often and make it difficult to stay diligent and focused on TDD. When tests are slow (and by slow I mean greater than one or two seconds to run an individual test), development slows down, and when that slows down distractions appear to feed on the free time.
 
-Choosing a persistence layer at the start of a project is almost always a mistake. The beginning of a project is the point of most ignorance, and the part of your app that is the least known is the domain model and what will actually need to be persisted. Also, as you develop you may find that your choice of persistence library is no longer the most optimal for the solution at hand.
+How do you keep a test suite fast? You can make sure to only load in what you need (ala not Rails, as anyone who has a 15s load time Rails app can attest), but nothing slows down overall test execution worse than communication with an external service, like your database of choice. Tests that run purely in memory are the fastest tests possible.
 
-Have you ever tried to replace ActiveRecord code in a typical Rails App with something else?
+Choosing a persistence layer at the start of a project is almost always a mistake in multiple ways. As every persistence library has well known pros and cons, making a decision without understanding the domain model of your application ensures you will have issues later on when your data needs don't match the storage of said data. On top of this, any choice you make now is a choice that cannot be made or deferred to later, resulting in a suboptimal architecture especially if you follow The Rails Way and sprinkle ActiveRecord code all throughout your app. Don't make decisions now that will be difficult, if not impossible, to fix later on. As a minor but related point, persistence is not your application, so make application-level decisions first and anything extra later. As Uncle Bob says, good architecture is the maximization of decisions **not** made.
 
-Why are you exposing your database tables to the user via your view? Why are you coupling your **entire** code base with your persistence implementation and database choice?
+It's not hard to find many different patterns developed over decades that solve this problem in a myriad of different ways and for all sorts of different systems and languages. Most of the best can be found in Martin Fowler's book [Patterns of Enterprise Application Architecture](http://martinfowler.com/books/eaa.html). The two I spent the most time investigating are the [Repository](http://martinfowler.com/eaaCatalog/repository.html) and [Data Mapper](http://martinfowler.com/eaaCatalog/dataMapper.html) as well as a number of existing Ruby libraries implementing these patterns.
 
-If there's anything you take out of Uncle Bob's talk (see [Part 1]({% post_url 2012-05-29-designing-a-rails-app-part-1 %})), is that you need to be well aware what parts of your application are implementation details and what parts are your actual implementation. I think I'm safe in saying that if you're building an application to be consumed via the web, persistance is always an implementation detail. The application *does not* and *should not* care how information is stored. It needs the information to work with it and that's it.
+The pattern I chose needed to fit two criteria: needs to be simple to implement and it needs to be pluggable, allowing me to have an in-memory implementation as well as for whatever persistence tool I end up using. DataMapper, like ActiveRecord, hides away persistence logic behind the domain model itself and is meant to be a layer you never have to think too much about, it just works behind the scenes. I did not want this type of library as it puts too much persistence logic in the model itself and would be difficult to abstract out an in-memory implementation.
 
-On top of all this, you should be developing with a top-down approach, so the last thing you should ever think about for any story is how and what data is persisted, but why limit yourself? As Uncle Bob says, good architecture is defined by the fewest decisions made, so what do we need to do to ensure our application doesn't become ActiveRecord spaghetti coupling again? In short how do you abstract out persistence (ActiveRecord) from app logic?
-
-It's not hard to find many different patterns developed over decades that solve this problem in a myriad of different ways and for all sorts of different systems and languages. Most of the best can be found in Martin Fowler's book [Patterns of Enterprise Application Architecture](http://martinfowler.com/books/eaa.html). The two I spent the most time investigating are the [Repository](http://martinfowler.com/eaaCatalog/repository.html) and the [Data Mapper](http://martinfowler.com/eaaCatalog/dataMapper.html) as well as a number of existing Ruby libraries implementing these patterns.
-
-### Repository
-
-### DataMapper
-
-
-### The Raidit Choice
-
-In choosing the pattern for raidit I needed to fit two criteria: super stupidly simple and pluggable so that I can develop and test the application using only in-memory data. After evaluating various Ruby libraries for each pattern, including the work that's coming out of the DataMapper2 project, I realized that I could build one myself for basically no effort. I ended up with the following:
+Thus I went with a minimal implementation of the Repository pattern. I have a top level Repository object that handles the mapping between models and persistence logic with the models being kept free of any knowledge that they are being persisted. While Fowler's pattern recommends any Repository object include a full query language of it's own (e.g. Hibernate's HQL), all I needed was a decoupled mapping between an model, like User, to it's persistence logic. As such I came up with the following:
 
 <pre><code data-language="ruby">
 class Repository
 
   ##
-  # Add a mapping to this repository. This will add to the existing known
+  # Add mapping(s) to this repository. This will add to the existing known
   # set of mappings. To start the mapping list anew, use +.reset!+ first.
   ##
   def self.configure(options = {})
@@ -62,7 +51,7 @@ class Repository
 end
 </code></pre>
 
-It's usage is equally simple. There's a two step process: 1) configure a repository object for each domain model class you have
+It's usage is equally simple. First define how the classes map to their persistence:
 
 <pre><code data-language="ruby">
   # Using strings here so that there isn't a hard dependency on
@@ -77,13 +66,16 @@ It's usage is equally simple. There's a two step process: 1) configure a reposit
   )
 </code></pre>
 
-All current in-memory repository objects are in a single file: [https://github.com/jasonroelofs/raidit/blob/master/app/repositories/in_memory.rb](https://github.com/jasonroelofs/raidit/blob/master/app/repositories/in_memory.rb), and their individual APIs simply evolve and grow according to the needs of the application.
-
-2) Request that repository object when you need to pass information back and forth.
+then request the persistence object whenever persistence is needed, for example:
 
 <pre><code data-language="ruby">
   user = User.new
   Repository.for(User).save(user)
 </code></pre>
 
-When I get to the point of requiring actual persistence, I'll be able to take the resulting InMemory API and very quickly build a wrapper for whatever persistence layer I choose. The biggest bonus of this is not the pluggable-ness but the fact that my tests can continue to use the in-memory repositories, staying crazy fast, and I'll have a small, self-contained test suite that does hit a database, so the overall test slowdown is minimal.
+This setup has a number of benefits outside of the decoupling of modes and persistence. With this layer, I'm able to have multiple implementations of persistence sitting right next to each other without problems. As the models don't know anything about the Repository objects I'm guarenteed to not have any persistence details leak out into the app. This also opens up the possibility of using different persistence for different models, if it comes to needing that. On top of all this, as I develop the application using purely in-memory persistence, I'll be evolving a full persistence API for raidit, documenting how to implement any other type of persistence.
+
+You can see the current implementation of the various in-memory repositories in [app/repositories/in_memory.rb](https://github.com/jasonroelofs/raidit/blob/master/app/repositories/in_memory.rb). You can also follow along on a gist I'll be continuously updating with full test suite timing runs here: [https://gist.github.com/2886208](https://gist.github.com/2886208).
+
+Tests and code that runs only in memory is wicked fast. Even cucumber is fast when run this way. So stop accepting slow tests as the norm and get back to productivity. Abstract out your persistance, stop coupling every piece of your application to ActiveRecord, and get back to developing software.
+
