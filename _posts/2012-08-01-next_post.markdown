@@ -1,0 +1,49 @@
+---
+layout: post
+title: Naming is Everything
+published: true
+series: Designing a Rails App
+tags:
+  - software
+  - design
+  - naming
+  - raidit
+---
+
+> There are two hard things in Computer Science: cache invalidation, naming things, and off-by-one errors.
+>
+> -- Phil Karlton (modified)
+
+This ever so famous quote will probably always be true. There are techniques for updating caches without having to worry about invalidation, such as [Russian Doll caching](http://37signals.com/svn/posts/3112-how-basecamp-next-got-to-be-so-damn-fast-without-using-much-client-side-ui), where you simply create new caches instead of invalidating old, but no size fits all projects and you're guaranteed to get something wrong the first time you implement caching. Off by one errors, well I hope your test suite is up to date and comprehensive, this is just going to happen.
+
+But I digress. Today we are going to talk about Naming Things. Naming things is hard. Very hard, and yet it is something we software developers are forced to do on a daily basis. I would like to say that it gets easier but in my experience so far, it hasn't yet. What I have learned though, is that there is nothing more important to good software design than the names you give your objects. More specifically:
+
+**Nothing has a greater impact on the quality of your code than the names you choose.**
+
+Bad, inconsistent naming will lead to crufty and difficult to understand code, whereas good, explicit and consistent names make it far easier to follow and reason about code, leading to better designs and increased maintainability. Obviously naming can't exclusively ensure good or bad design. It still takes a good developer who actively works with and refactors the code to ensure the names and functionality are in lock step with each other. That said as of late any time I've ran into pain it's been because either the object I'm working with has bad naming or the object I'm working with is doing too much and the nested functionality needs to be given it's own name.
+
+Now anyone who has spent time learning and studying the art and craft of Software Development will have run into numerous articles about the benefits of naming in code. My favorite is Steve Yegge's [Execution in the Kingdom of Nouns](http://steve-yegge.blogspot.com/2006/03/execution-in-kingdom-of-nouns.html). So, in order to not be Yet Another Blog-o-Text and to follow the pattern I've set in this series of posts, I will instead focus on the cases where naming has affected my design and development of [raidit](https://github.com/jasonroelofs/raidit), and hopefully this will help you internalize how important Naming is to code as much as it's helped me.
+
+
+
+
+--- Notes ---
+
+What you name your objects and methods can make, or break, your software.
+
+parameter names: https://github.com/jasonroelofs/raidit/commit/3a942a83aeece200c7c40661ccbc1cec55d37e64
+
+Functions over objects + method: https://github.com/jasonroelofs/raidit/commit/89f3b123e2441e29d5ab24a271757d3c1f8e9be3
+ - Dude, not everything is an object
+ - Interactors, #run vs .find_by_id http://collectiveidea.com/blog/archives/2012/06/28/wheres-your-business-logic/
+
+method names: b4c0798
+
+object names:
+ - Fit app nomeclature: b9b456d, a71a18c
+ - Name consistency: 8d3e8b4 (FindRaid -> ShowRaid) -> be40902 (reverted)
+
+Logic + name doesn't mesh: 4499200
+
+
+
