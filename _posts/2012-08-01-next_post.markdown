@@ -4,46 +4,120 @@ title: Naming is Everything
 published: true
 series: Designing a Rails App
 tags:
-  - software
-  - design
-  - naming
-  - raidit
+- software
+- design
+- naming
+- raidit
 ---
 
-> There are two hard things in Computer Science: cache invalidation, naming things, and off-by-one errors.
+---
+
+I would like to start this off by recommending all developers who care about readable, well designed code go get a copy of Uncle Bob's [Clean Code](http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882/ref=sr_1_1?ie=UTF8&qid=1348537881&sr=8-1&keywords=clean+code). What I'm about to discuss here is covered in a ton more detail and with some very good refactoring examples.
+
+---
+
+I've come to the realization that there is nothing more important well designed code than good names. Your software could be exquisitly designed, very well TDD and a beautiful web of clean, decoupled objects and services, but that work will be considered wasted if another developer can't come into the project and understand what your code is doing. Software development is two processes: First, telling a computer what to do and Second, telling other people what the computer is doing. If you fail at the second point then the first might as well never have happened.
+
+The most unfortunate consequence of "get it done quick" is forgetting that your code will be read and maintained by someone else at some point in the future, and as a result the resulting code is regularly impossible to read, reason about, or maintain. Why? Because the first thing get-it-quick developers do is skimp on their naming. They have classes named Controller, Manager, and Factory that grow into massive monstrosities containing way more functionality than would ever be considered sane. They write methods with ambiguous names, or names that don't at all match the resulting functionality. They write code blocks with single-letter variable names, use names with no rhyme or reason (enterprise = spock + kirk) or even constantly reuse the same small set of variables so you have to diligently follow the execution path to even know what you have in memory at the time.
+
+And yes, the "They" above is Me, though I can say I've never let a spock + kirk make it into production code, that I can remember. I sincerely apologize if I did. I **have** let curse words into production, something I will never, ever let happen again, but I digress..
+
+So what am I doing to stop this madness, and what can you do to make your code readable, understandable, and maintainable?
+
+<p style="text-align: center; font-size: 30px; font-weight: bold; padding-top: 20px; padding-bottom: 20px;">Choose Good Names</p>
+
+Of course, there's one *small* caveat...
+
+> There are two hard things in Computer Science: cache invalidation and naming things.
 >
-> -- Phil Karlton (modified)
+> -- Phil Karlton
 
-This ever so famous quote will probably always be true. There are techniques for updating caches without having to worry about invalidation, such as [Russian Doll caching](http://37signals.com/svn/posts/3112-how-basecamp-next-got-to-be-so-damn-fast-without-using-much-client-side-ui), where you simply create new caches instead of invalidating old, but no size fits all projects and you're guaranteed to get something wrong the first time you implement caching. Off by one errors, well I hope your test suite is up to date and comprehensive, this is just going to happen.
+  Choosing good names is hard. *Really* hard, but anyone who said software development was easy was lying to you. Oh yes giving directions to a computer is rather simple, but that's a small part of what we do. As many prominent developers have been saying lately, Software is a Social Art. What you write is read many times over by many different people. It's our job to make that code readable, and through readability and the proper discipline comes good design.
 
-But I digress. Today we are going to talk about Naming Things. Naming things is hard. Very hard, and yet it is something we software developers are forced to do on a daily basis. I would like to say that it gets easier but in my experience so far, it hasn't yet. What I have learned though, is that there is nothing more important to good software design than the names you give your objects. More specifically:
+Even the simplest methods are exponentially more understandable with good naming. Take a copy method, which do you find easier to read?
 
-**Nothing has a greater impact on the quality of your code than the names you choose.**
+<pre><code data-language="ruby">
+  def copy(x, y)
+    x.member1 = y.member1
+    x.member2 = y.member2
+  end
+</code></pre>
 
-Bad, inconsistent naming will lead to crufty and difficult to understand code, whereas good, explicit and consistent names make it far easier to follow and reason about code, leading to better designs and increased maintainability. Obviously naming can't exclusively ensure good or bad design. It still takes a good developer who actively works with and refactors the code to ensure the names and functionality are in lock step with each other. That said as of late any time I've ran into pain it's been because either the object I'm working with has bad naming or the object I'm working with is doing too much and the nested functionality needs to be given it's own name.
+vs
 
-Now anyone who has spent time learning and studying the art and craft of Software Development will have run into numerous articles about the benefits of naming in code. My favorite is Steve Yegge's [Execution in the Kingdom of Nouns](http://steve-yegge.blogspot.com/2006/03/execution-in-kingdom-of-nouns.html). So, in order to not be Yet Another Blog-o-Text and to follow the pattern I've set in this series of posts, I will instead focus on the cases where naming has affected my design and development of [raidit](https://github.com/jasonroelofs/raidit), and hopefully this will help you internalize how important Naming is to code as much as it's helped me.
+<pre><code data-language="ruby">
+  def copy(from, to)
+    to.member1 = from.member1
+    to.member2 = from.member2
+  end
+</code></pre>
 
+A simple set of names makes the method immediately and completely descriptive without even looking at the implementation. I'm copying data from the object at *from* to the object at *to*. With the nondescript *x* and *y* paramters you have to look at the implementation to know which one is copying to where. Taking the care, the few seconds or few minutes to write out the variables in full, to name your objects descriptively, to make sure your code is readable, will pay off in spades. You will come to understand how the 10 seconds you save now by not caring about naming will cost you many hours of lost work down the road.
 
+To help with this understanding I've pulled together a number of examples from [raidit](https://github.com/jasonroelofs/raidit) on good naming, some bad naming, and some refactoring I've done to get to better naming.
 
+#### Parameters and Variables
 
---- Notes ---
+[Renaming params to attributes](https://github.com/jasonroelofs/raidit/commit/3a942a83aeece200c7c40661ccbc1cec55d37e64)
 
-What you name your objects and methods can make, or break, your software.
+Parameter names don't have to be short to be bad. Sometimes the name just has too much leeway in what it could be. In this case *params* is too open of a name. I don't want to be passing any random bit if data into this method through it's parameters, what I'm passing down are the *attributes* of the model I'm building.
 
-parameter names: https://github.com/jasonroelofs/raidit/commit/3a942a83aeece200c7c40661ccbc1cec55d37e64
+[ChangePassword](https://github.com/jasonroelofs/raidit/blob/5cf5cd01255721954c6eb143cf739fe053a82657/app/interactors/change_password.rb)
 
-Functions over objects + method: https://github.com/jasonroelofs/raidit/commit/89f3b123e2441e29d5ab24a271757d3c1f8e9be3
- - Dude, not everything is an object
- - Interactors, #run vs .find_by_id http://collectiveidea.com/blog/archives/2012/06/28/wheres-your-business-logic/
+Verbose variable names are always better than one- or two-letter names. My choice of very explicit, verbose variable names in this object leaves no room for doubt or confusion on the functionality found here.
 
-method names: b4c0798
+#### Methods and Functions
 
-object names:
- - Fit app nomeclature: b9b456d, a71a18c
- - Name consistency: 8d3e8b4 (FindRaid -> ShowRaid) -> be40902 (reverted)
+[Refactor #run to a static method](https://github.com/jasonroelofs/raidit/commit/b4c079816225270b946eaa12e9900067f2476a64)
 
-Logic + name doesn't mesh: 4499200
+As I mentioned in [Part 2]({% post_url 2012-06-05-rules-for-rails-app-development %}) of this series, as well as in my post at the [Collective Idea blog](http://collectiveidea.com/blog/archives/2012/06/28/wheres-your-business-logic/), I've been defaulting my Interactor objects to have a *#run* instance method which contains the main chunk of functionality for that action. Now I was at the time aware that *run* is a not a good name, and as I have built out the functionality in raidit, I've been finding better names for these methods. I've also come to understand and appreciate that [Dude, not everything is an object](http://steve-yegge.blogspot.com/2006/03/execution-in-kingdom-of-nouns.html) and have been changing some simpler Interactors to just be static methods with names that are very explicit on what they do.
 
+#### Constructors
 
+Now this may come across as an odd section given I've focused on Ruby, but a constructor is nothing more than a method that builds and returns a new object. In Ruby's case, any static method that returns an instance of the class said method resides in can be considered a constructor. For example (not from raidit this time), take the following class with a few named constructors:
 
+<pre><code data-language="ruby">
+class ListMessages
+
+  def self.received_by(user)
+    self.new(:received, user)
+  end
+
+  def self.sent_to(user)
+    self.new(:sent, user)
+  end
+
+  def initialize(sent_or_received, user)
+    @messages = Message.send("#{sent_or_received}_by", user)
+  end
+
+end
+</code></pre>
+
+Then compare the code to run them
+
+<pre><code data-language="ruby">
+messages = ListMessages.sent_to(user)
+
+# vs
+
+messages = ListMessages.new(:sent, user)
+</code></pre>
+
+The differences are more subtle but noticable. The first one reads more like a sentance, a statement of intent, while the second requires you to understand that you need to pass in a symbol stating which type of Message you want for the given user. When code tells you it's intent without getting you bogged down in the implementation details, then you know you have good naming, and through that naming your design gets better.
+
+#### Behavioral Naming and Consistency
+
+Once you've gotten better into the habit of spending time picking good names, and figuring out how to write readable code, you'll find yourself in situations where the names you've chosen are fine names in and of themselves, but there's something still not right about them. You may be running into definition and naming inconsistencies within the app. One of the less immediately obvious aspects of well designed, well named code is that the names are consistent and follow a convention across the application. If you have Create and Add, you should pick one and stick with it. In raidit, I have the following conventions for my Interactors:
+
+* Find[Type]    - Return a single object of the given type
+* List[Types]   - Return a list of objects, though that list can be empty
+* Update[Type]  - Process an existing object with new information
+
+For app-specific functionality I work to keep the nomenclature following the application's needs and not named according to the fact that the application is a website. For example, I used to have *FindRaid* named *ShowRaid* ([commit](https://github.com/jasonroelofs/raidit/commit/8d3e8b4)) but [reverted](https://github.com/jasonroelofs/raidit/commit/be40902) that when I realized that the action had nothing to do with "showing", just pulling the object from persistence. Adding a new raid is called [ScheduleRaid](https://github.com/jasonroelofs/raidit/blob/master/app/interactors/schedule_raid.rb). Creating a new account is done in [SignUpUser](https://github.com/jasonroelofs/raidit/blob/master/app/interactors/sign_up_user.rb) and it's counterpart is [LogUserIn](https://github.com/jasonroelofs/raidit/blob/master/app/interactors/log_user_in.rb), in keeping with the wording used on the site itself: Sign Up, Log In, Log Out. With objects named like this, we now have an application structure that tells you what the application does even from the file names. Check it out for yourself! [raidit/app/interactors](https://github.com/jasonroelofs/raidit/tree/master/app/interactors)
+
+---
+
+As I've developed raidit, almost every time I've gotten the "this isn't quite right feel", or whenever my test setup started to get unwieldy and painful, the fix has been to either change an existing name or to take a piece of functionality out of one object and give it its own name. Good naming may be one of the hardest jobs in Software but it's also one of the most important. Make sure your code is readable by other developers, not just understandable by you.
+
+Bad names facilitate bad design. Good names breed good design. Spend the time to do this part right and the rest will follow.
