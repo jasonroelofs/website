@@ -67,7 +67,7 @@ class Guild < ActiveRecord::Base
 end   
 </code></pre>
 
-You can still have fast tests as long as you aren't putting data in your database for every test. Have a suite of tests that do talk to the database to ensure that side of the app is working, then use bogus objects or mocks elsewhere. This pattern will only work if you also have an Acceptance test suite that tests the full stack. Mocked tests without tests that prove that both sides of the mock are correct (what [J.B. Rainsberger](http://www.jbrains.ca/) calls Contract Tests in his talk ["Integration Tests are a Scam"](http://www.infoq.com/presentations/integration-tests-scam)). Otherwise you will end up with passing test but failing code.
+You can still have fast tests as long as you aren't putting data in the database for every test. Have a suite of tests that do talk to the database to ensure that side of the app is working, then use bogus objects or mocks elsewhere. This pattern will only work if you also have an Acceptance test suite that tests the full stack, taking the role of "Contract Tests"<sup>[2](#footnote)</sup>. Mocked tests without tests that prove that both sides of the mock are correct will leave you with a brittle test suite that hides bugs in how your objects communicate.
 
 In explicitly taking the other extreme from ActiveRecord coupling everywhere, I've learned a lot more about what not to do and how to find a good middle ground when dealing with serialization / persistence. Use objects and/or methods to hide implementation details (like ActiveRecord scopes and ARel). This gives you names which provide meaning and intent in your code and give you the hooks to start building fast tests and improve your overall design.
 
@@ -77,3 +77,5 @@ I'll have one more post in this series that takes the development rules I set fo
 
 <a name="footnote"></a>
 1: [Smalltalk Best Practice Patterns](http://www.amazon.com/Smalltalk-Best-Practice-Patterns-Kent/dp/013476904X) Get this book if you're serious about learning how to Think in Objects.
+
+2: [Integration Tests are a Scam](http://www.infoq.com/presentations/integration-tests-scam) by [J.B. Rainsberger](http://www.jbrains.ca/)
