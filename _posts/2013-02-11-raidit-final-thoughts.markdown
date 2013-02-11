@@ -67,11 +67,11 @@ def test_some_action
 end
 </code></pre>
 
-Now the code shows it's intent, the tests show and prove behavior, and any changes made to *active_sorted_by_name* won't cause the test to fail. Testing the behavior of *active_sorted_by_name* can then be done with actual database objects and in one place only, minimizing the speed impact on the full suite.
+Now the code shows it's intent, the tests show and prove behavior, and any changes made to `active_sorted_by_name` won't cause the test to fail. Testing the behavior of this new method can then be done with actual database objects and in one place only, minimizing the speed impact on the full suite.
 
 There is one very important caveat: this pattern can only be used safely if you also have an end-to-end acceptance suite. I believe this is so important that I'm going to say it again: **If you are going to use mocks in tests you must have a separate acceptance-level test suite!** If there are no tests to prove that objects to actually communicate as the mocks say they do, then the mocked tests, in many cases, are actually a hinderance, passing when the application itself fails.
 
-In raidit I made sure to have a full end-to-end [Cucumber test suite](https://github.com/jasonroelofs/raidit/tree/master/features) to ensure the mocks in my [controller tests](https://github.com/jasonroelofs/raidit/tree/master/test/controllers) were correct. I did still follow my original plan of not mocking what I own; considering Rails Controllers outside of "ownership" of the application. None of the domain-level unit tests use mocking, and with in-memory objects that worked really well, though please see my previous post for the caveats here. I'm no longer in the "mocks are bad!" crowd but I still am careful to make sure I'm using them correctly and to have another test suite to keep my mock use in check.
+In raidit I made sure to have a full end-to-end [Cucumber test suite](https://github.com/jasonroelofs/raidit/tree/master/features) to ensure the mocks in my [controller tests](https://github.com/jasonroelofs/raidit/tree/master/test/controllers) were correct. I did still follow my original plan of not mocking what I own; considering Rails Controllers outside of "ownership" of the application. None of the domain-level unit tests use mocking, and with in-memory objects that worked really well, though please see my [previous post]({% post_url 2013-01-28-implementing-persistence %}) for the caveats of this approach. I'm no longer in the "mocks are bad!" crowd but I still am careful to make sure I'm using them correctly and to have another test suite to keep my mock use in check.
 
 ## Hide persistence details
 
@@ -81,7 +81,7 @@ Following along the previous point, and the [previous post]({% post_url 2013-01-
 
 If I was to pick one definite win in this experiment it's how the Interactor pattern has helped me understand what Object-Oriented Programming and Single Responsibility Principle really means. There's nothing magical about Interactors &mdash; in almost every case they should be just plain Ruby objects &mdash; but nothing helps the human mind out more than giving concrete names to a concept. As Uncle Bob pointed out [in his talk](http://www.confreaks.com/videos/759-rubymidwest2011-keynote-architecture-the-lost-years), having a set of Interactor objects leads you to organize your source code in a way that makes it almost trivial to understand what an application does. Here's Raidit's [list of interactors](https://github.com/jasonroelofs/raidit/tree/master/app/interactors). Even if you didn't know what the application did, you can easily find out what operations are currently available by looking at the classes in this directory, vastly improving code readability and facilitating code reuse in ways I've honestly never experienced before.
 
-This isn't to say **everything** should be an interactor. As stated before I took the opposite extreme position to help prove a point. There's nothing wrong with doing simple one-liners in a Rails controller, such as *#find*, vs building an entire new object just to encapsulate that one piece of logic (e.g. [FindRaid](https://github.com/jasonroelofs/raidit/blob/master/app/interactors/find_raid.rb)). As in all things, be pragmatic. If you ever get stuck wondering where functionality should go, and it doesn't fit a Controller or a Model, make a new object! That's all the Interactor pattern is: lots of small objects that each have as few responsibilities as possible.
+This isn't to say **everything** should be an interactor. As stated before I took the opposite extreme position to help prove a point. There's nothing wrong with doing simple one-liners in a Rails controller, such as `#find`, vs building an entire new object just to encapsulate that one piece of logic (e.g. [FindRaid](https://github.com/jasonroelofs/raidit/blob/master/app/interactors/find_raid.rb)). As in all things, be pragmatic. If you ever get stuck wondering where functionality should go, and it doesn't fit a Controller or a Model, make a new object! That's all the Interactor pattern is: lots of small objects that each have as few responsibilities as possible.
 
 ## The Problem Isn't Rails
 
@@ -93,9 +93,9 @@ So in all this, my suggestions for keeping your Rails application code base unde
 
 * Keep controller actions short.
 * Keep models short.
-* Build lots of small objects, and put them in well named locations, like *app/[object-type]*. E.g. put decorators in *app/decorators* (and update *config.autoload_paths* appropriately).
-* Only put in *lib/* what can be pulled into a gem. We need to stop treating *lib/* as a catch-all dumping ground.
-* If it's a domain model, put it in *app/models*. The class doesn't have to be ActiveRecord::Base to live there.
+* Build lots of small objects, and put them in well named locations, like `app/[object-type]`. E.g. put decorators in `app/decorators` (and update `config.autoload_paths` appropriately).
+* Only put in `lib/` what can be pulled into a gem. We need to stop treating `lib/` as a catch-all dumping ground.
+* If it's a domain model, put it in `app/models`. The class doesn't have to be ActiveRecord::Base to live there.
 * And above all else: Listen to your code! Test pain is a good thing, it's telling you there's a problem with the design. Refactor until the code is pain free once more.
 
 It's been fun to buck trends and intentionally go places I know I'd have troubles. I've learned a lot through this and discussions over code design and I hope I've helped out others in their quest to better software design as well.
