@@ -47,9 +47,9 @@ def test_some_action
   order_mock.expects(:limit).with(10).returns(limit_mock)
   MyModel.expects(:where).with(:active => true).returns(where_mock)
   
-  some_action
+  get :some_action
   
-  @models.should == limit_mock
+  assigns(:models).should == limit_mock
 end
 </code></pre>
 
