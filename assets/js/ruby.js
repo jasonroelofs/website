@@ -15,12 +15,12 @@ Rainbow.extend('ruby', [
     {
         'name': 'string',
         'matches': {
-            1: 'string.string-open',
+            1: 'string.open',
             2: {
                 'name': 'string.keyword',
                 'pattern': /(\#\{.*?\})/g
             },
-            3: 'string.string-close'
+            3: 'string.close'
         },
         'pattern': /("|`)(.*?[^\\\1])?(\1)/g
     },
