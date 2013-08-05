@@ -29,12 +29,6 @@ author:
   github: "jasonroelofs"
 
 projects:
-  - name: RaidIt
-    slug: raidit
-    github_url: https://github.com/jasonroelofs/raidit
-    description:
-      "MMO focused calendar tool for scheduling player, guild, or server events"
-
   - name: SimpleAWS
     slug: simple_aws
     github_url: https://github.com/jasonroelofs/simple_aws
@@ -74,3 +68,15 @@ projects:
       "Ruby wrapper around the GCC-XML library. Includes binary installs of GCC-XML"
     website: http://rubygems.org/gems/gccxml_gem
     install_url: https://rubygems.org/gems/gccxml_gem
+
+  - name: RaidIt
+    slug: raidit
+    github_url: https://github.com/jasonroelofs/raidit
+    description:
+      "MMO focused calendar tool for scheduling player, guild, or server events"
+
+  - name: Slartibartfast
+    slug: slartibartfast
+    github_url: https://github.com/jasonroelofs/slartibartfast
+    description:
+      "Space-based exploration game. An experiment in game design and development. Currently written in Go."
