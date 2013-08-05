@@ -1,9 +1,7 @@
 ##
 # Jekyll config
 ##
-auto:         true
-server:       true
-server_port:  8080
+port:         8080
 pygments:     false
 pagination:   10
 markdown:     rdiscount
