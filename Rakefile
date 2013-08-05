@@ -18,7 +18,7 @@ end
 desc "One-off generate the site"
 task :generate do
   sh "rm -rf _site"
-  sh "bundle exec jekyll --no-auto --no-server"
+  sh "bundle exec jekyll build"
 end
 
 desc "Deploy the website"
