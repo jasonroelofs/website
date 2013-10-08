@@ -1,11 +1,15 @@
 ---
 layout: post
-title: Manage Resque with Upstart and Monit
+title: Managing Resque with Upstart and Monit
 tags:
-  - programming
+  - software
   - sysops
 published: true
 ---
+
+<blockquote>
+	This post is out of date. See my latest: <a href="{% post_url 2013-10-08-managing-resque-with-upstart %}">Managing Resque with Upstart</a>.
+</blockquote>
 
 <p>
 <a href="https://github.com/defunkt/resque">Resque</a>, the unix-y process and child based background worker library from <a href="http://github.com">Github</a>, is a joy to use. It's simple to set up and to integrate into your code, only requiring <a href="http://redis.io">Redis</a> for the queue, and runs through a single rake task from the command line. It really couldn't be easier for how scalable and robust the library is. What isn't easy, though, is managing and monitoring your Resque workers in production. There have been numerous attempts to solve this problem, including <a href="http://godrb.com/">god.rb</a>, <a href="http://mmonit.com/monit/">Monit</a>, <a href="https://github.com/arya/bluepill">bluepill</a>, <a href="https://github.com/nevans/resque-pool">resque-pool</a> and <a href="https://github.com/ddollar/foreman">foreman</a>, but from my experience all of these solve only 90% of the problem, and that last 10% is guaranteed to cause you pain either through fragility, complicated configuration, or not alerting properly when your workers disappear. I've come to believe that any tool that tries to handle both process management <strong>and</strong> monitoring and alerting is trying to do too much and can't satisfactorily do either.
