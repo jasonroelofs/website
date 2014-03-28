@@ -13,6 +13,7 @@ exclude:
   - tmp
 include:
   - assets
+  - .well-known
 
 ##
 # Global Site config
