@@ -1,0 +1,41 @@
+{{ define "main" }}
+
+<p>
+My name is Jason Roelofs
+</p>
+
+<div class="my-info">
+  <span>
+    I work for <a href="https://stripe.com">Stripe</a>
+  </span>
+
+  <span>
+    <a href="https://twitter.com/jasonroelofs">Twitter</a> | <a href="https://www.linkedin.com/in/jasonroelofs/">LinkedIn</a> | <a href="https://github.com/jasonroelofs">GitHub</a> | <a href="https://keybase.io/jasonroelofs">Keybase</a></p>
+  </span>
+</div>
+
+<hr>
+
+<div class="sections">
+  <div class="column">
+    {{ range $.Site.Params.LeftSections }}
+      {{ with $.Site.GetPage . }}
+      <div class="section">
+        <h1>{{ .Title }}</h1>
+      </div>
+      {{ end }}
+    {{ end }}
+  </div>
+
+  <div class="column">
+    {{ range $.Site.Params.RightSections }}
+      {{ with $.Site.GetPage . }}
+      <div class="section">
+        <h1>{{ .Title }}</h1>
+      </div>
+      {{ end }}
+    {{ end }}
+  </div>
+</div>
+
+{{ end }}

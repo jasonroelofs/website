@@ -1,0 +1,78 @@
+/* CSS - Cascading Style Sheet */
+/* Palette color codes */
+/* Palette URL: http://paletton.com/#uid=70l0u0kw0w0jvDaoOy4y4oODajv */
+
+:root {
+  --color-primary: #ff5c00;
+  --color-primary-light: #FF9C64; /* #FF8139; */
+  --color-primary-dark: #9B3800; /* #C64700; */
+
+  --color-secondary-1: #FF9C00; /* Orange */
+  --color-secondary-1-light: #FFC364;
+  --color-secondary-1-dark: #9B5F00;
+
+  --color-secondary-2: #0E53A7; /* Blue */
+  --color-secondary-2-light: #5384BD;
+  --color-secondary-2-dark: #063266;
+
+  --color-complement: #00A779;  /* Teal */
+  --color-complement-light: #4ABE9E;
+  --color-complement-dark: #00825E;
+
+  --color-link: var(--color-primary);
+
+  --color-text: #444;
+  --color-background: #f9f9f9;
+}
+
+body{
+  margin: 40px auto;
+  max-width: 1000px;
+  line-height: 1.6;
+  font-size: 18px;
+  color: var(--color-text);
+  background-color: var(--color-background);
+  padding: 0 10px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1, h2, h3 {
+  line-height: 1.2;
+  font-family: 'Staatliches', cursive;
+}
+
+h1 {
+  line-height: 0.60;
+  color: var(--color-secondary-2-dark);
+  border-bottom: 3px solid var(--color-secondary-2-light);
+}
+
+hr {
+  color: var(--color-secondary-2-light);
+}
+
+a {
+  color: var(--color-link);
+  text-decoration: none;
+}
+
+.my-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.sections {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.sections .column {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+}

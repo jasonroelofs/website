@@ -1,0 +1,65 @@
+==================================================================
+https://keybase.io/jasonroelofs
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://jasonroelofs.com
+  * I am jasonroelofs (https://keybase.io/jasonroelofs) on keybase.
+  * I have a public key with fingerprint 97E0 6FE4 76E9 6B2E 1C02  03FA 9EB6 09A6 1157 F583
+
+To claim this, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "97e06fe476e96b2e1c0203fa9eb609a61157f583",
+            "host": "keybase.io",
+            "key_id": "9EB609A61157F583",
+            "uid": "5ca41e2744a258603e66abc3d8ddb000",
+            "username": "jasonroelofs"
+        },
+        "service": {
+            "hostname": "jasonroelofs.com",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1396032388,
+    "expire_in": 157680000,
+    "prev": "6abb29ee873dcedc0e54397511ae283715ee94443f8da600e302dfdce9adc61d",
+    "seqno": 14,
+    "tag": "signature"
+}
+
+with the aforementioned key, yielding the PGP signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: GnuPG v1
+Comment: GPGTools - https://gpgtools.org
+
+owFtkVlIVFEYx2csG1QKfahci64QFaPcfZmyTFKySCFBR9Cmu5w7c13uHe+Mo5MY
+VmYGLTYKlWVlhZKD9NJCRIuZILY4WBlYUQ8iahZFWmHruVZvPR3O+X7f7/t/nKaF
+80yR5jPXIjpiCmb2mR/cnRVMeVRvfQ0iaJIfsdUgpWDukBXVCXS3rqhexIZwDEBp
+GZAMDThawAEmojhKyDwHBBrleBrDKEamWAKxIi7NY3RAjcB7QKqiwTd4cSiS4cnM
+gPzGOT7rD185V6BEnsQAzpAkj1MsjRKApnlBJCRWkgQURQ3QA3SVLweQLuE9mqpr
+oEyTPUitFYEVnyICI7cx/j9UqqiVQ4db17yaqJXBqsvrdduMZq/fbdBVQHD89TgE
+RZXg/rDBB3SPoqmIDYOk6FUMMUZwMCBOsKwVAdVuRQcOxSAohmZhVNQYA3xQCTcQ
+cA4AliEkEUgiCiiS4BgKw3iAswSDUQBwJEkSMivxNIoCAsUlGaIcL4k0JiHGZhWq
+Bt0kzMk7odOjOFXeW6kDpPagOXG+yRxpWhAeZnyhKTIi+t/Hpq23/LRl4p1PVr7r
+D43vjlnkQ3JeX33cUhQ61ZfU/LGp/1dfyJkfCL+eVLNh157GjLE3INradsOVYpms
+YodCwy4ifqSnPctPdxSHxR1i4trOm78PWYobtu31pTvf/+jadHJ/3OCRiWk70VjX
+vSqh4uHLMW20czDvUgdzePO53sTJpKj6563B3MtFW5YW71y9eKR0Kjw41eyJyK06
+9vTs8qjt9u66lm+BwoqgHRebpnKqL+SB2GdasOtEihxLPJoZSJ4NnDaPW/LXvbiX
+feXtsg8t6daehqPTfReXxDsSklvvrN2av6Lglu+z/euBHVHDozdv3yeyu9pL1kwU
+fhpI6zzuf/Ul8Bs=
+=Fun8
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/jasonroelofs
+
+==================================================================

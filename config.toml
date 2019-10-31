@@ -1,3 +1,7 @@
 baseURL = "https://jasonroelofs.com/"
 languageCode = "en-us"
 title = "Jason Roelofs"
+
+[Params]
+  LeftSections = ["articles", "series"]
+  RightSections = ["shorts", "projects"]
