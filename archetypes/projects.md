@@ -1,7 +1,8 @@
 ---
 title: "{{ replace .Name "-" " " | title }}"
 date: {{ .Date }}
-order: 0
+weight: 0
+link: ""
 draft: false
 ---
 

@@ -4,4 +4,4 @@ title = "Jason Roelofs"
 
 [Params]
   LeftSections = ["articles", "series"]
-  RightSections = ["shorts", "projects"]
+  RightSections = ["projects", "talks"]

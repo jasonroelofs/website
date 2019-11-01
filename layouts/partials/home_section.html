@@ -1,0 +1,9 @@
+{{ with $.Site.GetPage . }}
+<div class="section">
+  <h1>{{ .Title }}</h1>
+
+  {{ range .Pages.ByWeight }}
+    {{ partial "list" . }}
+  {{ end }}
+</div>
+{{ end }}

@@ -44,7 +44,6 @@ h1, h2, h3 {
 h1 {
   line-height: 0.60;
   color: var(--color-secondary-2-dark);
-  border-bottom: 3px solid var(--color-secondary-2-light);
 }
 
 hr {
@@ -75,4 +74,9 @@ a {
   display: flex;
   flex-direction: column;
   width: 45%;
+}
+
+.description {
+  font-size: 80%;
+  padding-left: 1em;
 }

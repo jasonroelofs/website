@@ -22,6 +22,10 @@ My name is Jason Roelofs
       {{ with $.Site.GetPage . }}
       <div class="section">
         <h1>{{ .Title }}</h1>
+
+        {{ range .Pages.ByWeight }}
+          {{ partial "list" . }}
+        {{ end }}
       </div>
       {{ end }}
     {{ end }}
@@ -32,6 +36,10 @@ My name is Jason Roelofs
       {{ with $.Site.GetPage . }}
       <div class="section">
         <h1>{{ .Title }}</h1>
+
+        {{ range .Pages.ByWeight }}
+          {{ partial "list" . }}
+        {{ end }}
       </div>
       {{ end }}
     {{ end }}
