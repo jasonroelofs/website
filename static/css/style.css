@@ -62,6 +62,10 @@ a {
   width: 100%;
 }
 
+.my-info .links {
+  align-self: flex-end;
+}
+
 .sections {
   display: flex;
   flex-direction: row;
