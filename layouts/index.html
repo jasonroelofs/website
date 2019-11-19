@@ -29,8 +29,8 @@
       <div class="section">
         <h1>{{ .Title }}</h1>
 
-        {{ range .Pages.ByWeight }}
-          {{ partial "list" . }}
+        {{ range .Pages.ByPublishDate.Reverse }}
+          {{ partial "list_by_date" . }}
         {{ end }}
       </div>
       {{ end }}

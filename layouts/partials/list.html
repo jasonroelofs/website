@@ -1,8 +1,10 @@
-{{ if .Params.Link }}
-  <a href="{{ .Params.Link }}">{{ .Title }}</a>
-{{ else }}
-  <a href="{{ .URL }}">{{ .Title }}</a>
-{{ end }}
+<div>
+  {{ if .Params.Link }}
+    <a href="{{ .Params.Link }}">{{ .Title }}</a>
+  {{ else }}
+    <a href="{{ .URL }}">{{ .Title }}</a>
+  {{ end }}
+</div>
 
 {{ if not .Params.TitleOnly }}
 <div class="description">

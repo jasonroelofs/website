@@ -84,3 +84,14 @@ a {
   font-size: 80%;
   padding-left: 1em;
 }
+
+.article-short {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1em;
+}
+
+.article-short .publish-date {
+  opacity: 0.6;
+  font-size: 80%;
+}

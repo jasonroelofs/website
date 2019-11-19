@@ -3,5 +3,5 @@ languageCode = "en-us"
 title = "Jason Roelofs"
 
 [Params]
-  LeftSections = ["articles", "series"]
-  RightSections = ["projects", "talks"]
+  LeftSections = ["articles"]
+  RightSections = ["series", "projects", "talks"]
