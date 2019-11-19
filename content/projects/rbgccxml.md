@@ -6,4 +6,4 @@ link: https://github.com/jasonroelofs/rbgccxml
 draft: false
 ---
 
-Ruby library to parse and query C++ header files using GCCXML.
+Ruby library to parse and query C++ header files using [CastXML](https://github.com/CastXML/CastXML) (previously named GCCXML).
