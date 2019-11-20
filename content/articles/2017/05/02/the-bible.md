@@ -3,6 +3,8 @@ title: The Bible
 date: '2017-05-02T10:48:44-04:00'
 draft: false
 series: christianity
+aliases:
+  - /articles/archives/2017/05/02/the-bible
 ---
 
 The Bible, the source of all major teachings and writings defining Christianity, is a common tripping point for many people trying to understand the religion. The Bible contains such a myriad of lessons, stories, and situations that it can be difficult to know where to start or how to understand it. The very structure of the Bible has also often caused confusion and consternation when people take passages from different parts and try to compare and contrast them, leading to the oft-used argument that the Bible contains many contradictions.

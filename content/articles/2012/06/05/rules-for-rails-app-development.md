@@ -4,6 +4,8 @@ date: '2012-05-29T12:00:00-05:00'
 draft: false
 series: designing_a_rails_app
 titleOnly: true
+aliases:
+  - /2012/06/05/rules-for-rails-app-development
 ---
 
 If you haven't yet, please read [Designing a Rails App Part 1](/2012/05/29/designing-a-rails-app-part-1).

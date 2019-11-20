@@ -4,6 +4,8 @@ date: '2013-02-11T12:00:00-05:00'
 draft: false
 series: designing_a_rails_app
 titleOnly: true
+aliases:
+  - /2013/02/11/raidit-final-thoughts
 ---
 
 Back in May of 2012 I [started an experiment](/2012/05/29/designing-a-rails-app-part-1) to help me learn how to develop and design Rails applications to be maintainable in the long term. Specifically I wanted to figure out how to stay away from Fat-Model Massively-Coupled code bases typical in Rails applications. To ensure I gave myself an environment of learning and didn't fall into old habits through this process, I gave myself a set of [rules for development](/2012/06/05/rules-for-rails-app-development). These rules were intentionally set to be extreme opposites of the typical Rails-Way development practices. The rules were as follows:

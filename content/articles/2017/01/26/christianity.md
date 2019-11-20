@@ -3,6 +3,8 @@ title: Christianity
 date: '2017-01-26T19:42:35-05:00'
 draft: false
 series: christianity
+aliases:
+  - /articles/archives/2017/01/26/christianity
 ---
 
 > “I like your Christ, I do not like your Christians. Your Christians are so unlike your Christ.” - Mahatma Ghandi

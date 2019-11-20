@@ -4,6 +4,8 @@ date: '2012-07-13T12:00:00-05:00'
 draft: false
 series: designing_a_rails_app
 titleOnly: true
+aliases:
+  - /2012/07/13/abstract_persistence_logic
 ---
 
 Choosing a persistence library at the start of a project is almost always a mistake. As the beginning is the point of highest ignorance, why make such important and hard-to-change decisions before there's any definitive knowledge of the real needs of the application? The most important aspect of any given application is it's business rules and domain model, both of which are code. In the end, users don't care how data is persisted, but they do care that the app works as expected. Focus on the application and everything else will grow from there. Persistence is an implementation detail and thus should be a low priority task.

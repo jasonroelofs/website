@@ -3,6 +3,8 @@ title: Homosexuality
 date: '2017-07-24T12:55:19-04:00'
 draft: false
 series: christianity
+aliases:
+  - /articles/archives/2017/07/24/homosexuality
 ---
 
 It's finally time to address the issue that initially prompted my collection of articles on Christians and Christianity, but before we go anywhere, I need to lay out a few caveats.

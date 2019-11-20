@@ -3,6 +3,8 @@ title: Life, Part 1
 date: '2018-01-22T09:05:18-05:00'
 draft: false
 series: christianity
+aliases:
+  - /articles/archives/2018/01/22/life-part-1
 ---
 
 Life. Life is a weird thing. We can instantly identify when something is alive, however we do not have a good working definition for what constitutes "alive" or not. Also, until we find definitive proof to the contrary, it sure seems that the majority of all life in this unfathomably vast Universe is concentrated right here on our little blue planet. But what an amazing place it is! Life on this planet is everywhere, in uncountable variations and in forms from single-cell bacteria to the mighty blue whale, on land, in the air, and in the waters. There are very few places on this planet where life cannot or does not exist in some shape or form. In the [deepest oceans](https://blogs.scientificamerican.com/artful-amoeba/what-lives-at-the-bottom-of-the-mariana-trench-more-than-you-might-think/), the [darkest caves](https://ideas.ted.com/deep-in-an-ancient-cave-an-unexpected-form-of-life/), and the [harshest deserts](http://www.bbc.com/future/story/20140303-last-place-on-earth-without-life), we find life.

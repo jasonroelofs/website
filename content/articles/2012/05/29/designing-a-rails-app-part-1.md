@@ -4,6 +4,8 @@ date: '2012-05-29T12:00:00-05:00'
 draft: false
 series: designing_a_rails_app
 titleOnly: true
+aliases:
+  - /2012/05/29/designing-a-rails-app-part-1
 ---
 
 There is a rather frustrating problem with Rails development: nigh every Rails application quickly trends towards unmaintainability. These Rails apps become monolithic, bloated, difficult-to-understand and even harder to maintain over time. This isn't an attack on Rails itself, it is just a set of libraries, but this is a pervasive problem in the Rails community today. I myself have ended up with mess of a Rails app more times than I care to admit, and most of them were ones I started! Why do I and others constantly fall into this same trap and how can we stop this downward spiral?

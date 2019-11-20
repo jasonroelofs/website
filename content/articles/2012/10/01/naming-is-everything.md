@@ -4,6 +4,8 @@ date: '2012-10-01T12:00:00-05:00'
 draft: false
 series: designing_a_rails_app
 titleOnly: true
+aliases:
+  - /2012/10/01/naming-is-everything
 ---
 
 I would like to start this off by recommending all developers who care about building readable, well designed code go get a copy of Uncle Bob's [Clean Code](http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882/ref=sr_1_1?ie=UTF8&qid=1348537881&sr=8-1&keywords=clean+code). This book is a treasure trove of examples on refactoring and renaming to make cleaner code.

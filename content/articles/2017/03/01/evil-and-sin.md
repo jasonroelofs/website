@@ -3,6 +3,8 @@ title: Evil and Sin
 date: '2017-03-01T17:15:12+00:00'
 draft: false
 series: christianity
+aliases:
+  - /articles/archives/2017/03/01/evil-and-sin
 ---
 
 > The greatest trick the Devil ever pulled was convincing the world he didn't exist.

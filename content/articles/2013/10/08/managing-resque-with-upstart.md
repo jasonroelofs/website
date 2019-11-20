@@ -3,6 +3,8 @@ title: Managing Resque with Upstart
 date: '2013-10-08T12:00:00-05:00'
 draft: false
 titleOnly: true
+aliases:
+  - /2013/10/08/managing-resque-with-upstart
 ---
 
 This is a long overdue update to my previous post [Managing Resque with Upstart and Monit](/2012/03/12/manage-and-monitor-resque-with-upstart-and-monit). Much has changed in the world of process management and system administration and it's time to update my previous post with what I see is the current Best Practice.

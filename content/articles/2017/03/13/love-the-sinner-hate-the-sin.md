@@ -3,6 +3,8 @@ title: Love the Sinner, Hate the Sin
 date: '2017-03-13T17:50:27+00:00'
 draft: false
 series: christianity
+aliases:
+  - /articles/archives/2017/03/13/love-the-sinner-hate-the-sin
 ---
 > Do not judge, or you too will be judged. For in the same way you judge others, you will be judged, and with the measure you use, it will be measured to you. Why do you look at the speck of sawdust in your brother’s eye and pay no attention to the plank in your own eye? How can you say to your brother, ‘Let me take the speck out of your eye,’ when all the time there is a plank in your own eye? You hypocrite, first take the plank out of your own eye, and then you will see clearly to remove the speck from your brother’s eye.
 > - [Matthew 7:1-5](https://www.biblegateway.com/passage/?search=Matthew+7&version=NIV)

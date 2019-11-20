@@ -4,6 +4,8 @@ date: '2013-01-28T12:00:00-05:00'
 draft: false
 series: designing_a_rails_app
 titleOnly: true
+aliases:
+  - /2013/01/28/implementing-persistence
 ---
 
 In [Part 3](/2012/07/13/abstract_persistence_logic) of this series of posts I talked about abstracting persistence layers and the various patterns used, as well as showing the pattern I built into [raidit](http://github.com/jasonroelofs/raidit). I've now built the ActiveRecord-based Repository implementation, thus finishing raidit, so now it's time to talk about how this went, what I learned, and if this pattern is a good model for future projects.

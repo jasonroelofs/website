@@ -4,6 +4,8 @@ date: 2019-11-01T15:10:17-04:00
 weight: 1
 draft: false
 titleOnly: true
+aliases:
+  - /2013/04/29/keep-ops-happy
 ---
 
 I gave a talk at Mountain West Ruby Conf entitled "Keep Ops Happy: Designing for Production", a discussion of tips, tricks, and suggestions for how to design an application in a way that makes it easy to deploy and maintain in a production environment.

@@ -3,6 +3,8 @@ title: A Christian
 date: '2017-02-13T14:07:59+00:00'
 draft: false
 series: christianity
+aliases:
+  - /articles/archives/2017/02/13/a-christian
 ---
 
 > “The most important [commandment],” answered Jesus, “is this: ‘Hear, O Israel: The Lord our God, the Lord is one. Love the Lord your God with all your heart and with all your soul and with all your mind and with all your strength.’ The second is this: ‘Love your neighbor as yourself.’ There is no commandment greater than these.”
