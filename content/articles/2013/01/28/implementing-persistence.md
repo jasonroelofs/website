@@ -22,7 +22,7 @@ When working with in-memory objects, it's very easy to write code that expects o
 
 Another solution I considered would require a redesign of most of the domain models to work more like ActiveRecord, where models would be able to query for their associations as they needed them, something like the following:
 
-<pre><code data-language="ruby">
+{{< highlight ruby >}}
 class Guild
   def raids
     Repository.for(Raid).find_all_by_guild(self)
@@ -32,7 +32,7 @@ class Guild
     Repository.for(Guild).save(self)
   end
 end   
-</code></pre>
+{{< /highlight >}}
 
 But even with this, it's very easy to create data bugs related to memoization, or to feel you still have no real control over the queries an application is making for optimization purposes. Even so, there are further issues with this pattern.
 
@@ -52,7 +52,7 @@ So would I recommend others follow this pattern? No, not as I've done it here. T
 
 Don't leak persistence details outside of ActiveRecord (with the caveat that column names ending up in the view isn't in itself bad). For example, any code that chains scopes and/or ARel methods should refactored behind an Intention-Revealing Name <sup>[1](#footnote)</sup> (an instance method, class method, or object).
 
-<pre><code data-language="ruby">
+{{< highlight ruby >}}
 # Change this
 current_guild.raids.order_by(:created_at).limit(10)
 
@@ -64,7 +64,7 @@ class Guild < ActiveRecord::Base
     self.raids.order_by(:created_at).limit(count)
   end
 end   
-</code></pre>
+{{< /highlight >}}
 
 You can still have fast tests as long as you aren't putting data in the database for every test. Have a suite of tests that do talk to the database to ensure that side of the app is working, then use bogus objects or mocks elsewhere. This pattern will only work if you also have an Acceptance test suite that tests the full stack, taking the role of "Contract Tests"<sup>[2](#footnote)</sup>. Mocked tests without tests that prove that both sides of the mock are correct will leave you with a brittle test suite that hides bugs in how your objects communicate.
 

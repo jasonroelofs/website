@@ -32,21 +32,21 @@ Of course, there's one *small* caveat...
 
 Even the simplest methods are exponentially more understandable with good naming. Take a copy method, which is easier to read?
 
-<pre><code data-language="ruby">
-  def copy(x, y)
-    x.member1 = y.member1
-    x.member2 = y.member2
-  end
-</code></pre>
+{{< highlight ruby >}}
+def copy(x, y)
+  x.member1 = y.member1
+  x.member2 = y.member2
+end
+{{< /highlight >}}
 
 vs
 
-<pre><code data-language="ruby">
-  def copy(from, to)
-    to.member1 = from.member1
-    to.member2 = from.member2
-  end
-</code></pre>
+{{< highlight ruby >}}
+def copy(from, to)
+  to.member1 = from.member1
+  to.member2 = from.member2
+end
+{{< /highlight >}}
 
 A simple set of names makes the method immediately and completely descriptive without even looking at the implementation. It's copying data from the object at *from* to the object at *to*. With the nondescript *x* and *y* parameters we have to look at the implementation to know which one is copying to and from where. Taking the care, the few seconds or few minutes to write out the variables in full, to name your objects descriptively, to make sure the code is readable, will pay off in spades. Spending ten minutes now will save the next developer potentially hours of maintenance work.
 
@@ -72,7 +72,7 @@ As I mentioned in [Part 2](/2012/06/05/rules-for-rails-app-development) of this 
 
 Now this may come across as an odd section given my focus on Ruby, but a constructor is nothing more than a method that builds and returns a new object. In Ruby's case, any static method that returns an instance of the class said method resides in can be considered a constructor. For example, take the following class with a few named constructors:
 
-<pre><code data-language="ruby">
+{{< highlight ruby >}}
 class ListMessages
 
   def self.received_by(user)
@@ -88,17 +88,17 @@ class ListMessages
   end
 
 end
-</code></pre>
+{{< /highlight >}}
 
 Then compare the code to run them
 
-<pre><code data-language="ruby">
+{{< highlight ruby >}}
 messages = ListMessages.sent_to(user)
 
 # vs
 
 messages = ListMessages.new(:sent, user)
-</code></pre>
+{{< /highlight >}}
 
 The differences are subtle but noticable. The first one reads more like a sentance, a statement of intent, while the second requires you to understand that you need to pass in a symbol stating which type of Message you want for the given user. When code tells you it's intent without getting you bogged down in the implementation details, then you know you have good naming and are progressing towards better overall design.
 

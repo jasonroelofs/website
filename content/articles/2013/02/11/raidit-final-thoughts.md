@@ -32,7 +32,7 @@ Mocks and bogus objects are a great way to ensure that tests are isolating the c
 
 One of the easier mistakes to make when working with mocks is mocking implementation instead of behavior. I've seen a lot of code that makes this mistake, and it is frustrating to work with. One small change to the code, without changing behavior, breaks multiple tests and updating those tests is tedious and unproductive. I'll give an example of this kind of mocking, and how to fix it. Take the following method and test:
 
-<pre><code data-language="ruby">
+{{< highlight ruby >}}
 def some_action
   @models = MyModel.where(:active => true).order(:name).limit(10)
 end
@@ -50,11 +50,11 @@ def test_some_action
   
   assigns(:models).should == limit_mock
 end
-</code></pre>
+{{< /highlight >}}
 
 There is nothing here to show intent. This only tests implementation, any single change breaks the entire test even though the behavior may not change at all (for example, swapping the order and limit calls), and the test is very hard to read. This code and test is easily fixed up while still using mocks and staying away from database objects by using an Intent-Revealing Name (nothing is more important than [good naming](/articles/2012/10/01/naming-is-everything)). Simply refactor that scope mess into it's own method and mock that one method.
 
-<pre><code data-language="ruby">
+{{< highlight ruby >}}
 def some_action
   @models = MyModel.active_sorted_by_name(10)
 end
@@ -64,7 +64,7 @@ def test_some_action
   get :some_action
   assigns(:models).should == []
 end
-</code></pre>
+{{< /highlight >}}
 
 Now the code shows it's intent, the tests show and prove behavior, and any changes made to `active_sorted_by_name` won't cause the test to fail. Testing the behavior of this new method can then be done with actual database objects and in one place only, minimizing the speed impact on the full suite.
 

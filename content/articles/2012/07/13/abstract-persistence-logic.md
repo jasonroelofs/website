@@ -22,7 +22,7 @@ The pattern I chose needed to fit two criteria: simple and pluggable, as I neede
 
 The first implementation, and the implementation that raidit currently uses, consists of a single, simple object to map models to the appropriate repository implementation. As you can see here, this object is nothing more than a few helper methods on top of a Hash:
 
-<pre><code data-language="ruby">
+{{< highlight ruby >}}
 class Repository
 
   ##
@@ -49,33 +49,33 @@ class Repository
   end
 
 end
-</code></pre>
+{{< /highlight >}}
 
 It's usage is simple. First define how the classes map to their persistence:
 
-<pre><code data-language="ruby">
+{{< highlight ruby >}}
   Repository.configure(
     "User"        => InMemory::UserRepo.new
   )
-</code></pre>
+{{< /highlight >}}
 
 then request the persistence object whenever persistence is needed:
 
-<pre><code data-language="ruby">
+{{< highlight ruby >}}
   user = User.new
   Repository.for(User).save user
-</code></pre>
+{{< /highlight >}}
 
 An alternate implementation that's arguably more Ruby-esque is to simply set constants to the implementations, using those constants directly as needed, like so:
 
-<pre><code data-language="ruby">
+{{< highlight ruby >}}
   UserRepository = InMemory::UserRepo.new
 
   ...
 
   user = User.new
   UserRepository.save user
-</code></pre>
+{{< /highlight >}}
 
 Both setups have a number of benefits outside of the decoupling of persistence. Having this intermediate layer allows having multiple different implementations of persistence, even to the point of communicating with multiple different databases at the same time if so required. This layer also ensures that the models themselves know nothing about the persistence implementation, so I can be sure that there is no leakage of responsibilities.
 
