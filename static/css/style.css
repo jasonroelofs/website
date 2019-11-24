@@ -95,3 +95,7 @@ a {
   opacity: 0.6;
   font-size: 80%;
 }
+
+.highlight pre {
+  padding: 1em;
+}

@@ -27,11 +27,11 @@ class Guild
   def raids
     Repository.for(Raid).find_all_by_guild(self)
   end
-  
+
   def save
     Repository.for(Guild).save(self)
   end
-end   
+end
 {{< /highlight >}}
 
 But even with this, it's very easy to create data bugs related to memoization, or to feel you still have no real control over the queries an application is making for optimization purposes. Even so, there are further issues with this pattern.
@@ -63,7 +63,7 @@ class Guild < ActiveRecord::Base
   def recent_raids(count = 10)
     self.raids.order_by(:created_at).limit(count)
   end
-end   
+end
 {{< /highlight >}}
 
 You can still have fast tests as long as you aren't putting data in the database for every test. Have a suite of tests that do talk to the database to ensure that side of the app is working, then use bogus objects or mocks elsewhere. This pattern will only work if you also have an Acceptance test suite that tests the full stack, taking the role of "Contract Tests"<sup>[2](#footnote)</sup>. Mocked tests without tests that prove that both sides of the mock are correct will leave you with a brittle test suite that hides bugs in how your objects communicate.
