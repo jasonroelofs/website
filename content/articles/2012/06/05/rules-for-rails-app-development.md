@@ -8,7 +8,7 @@ aliases:
   - /2012/06/05/rules-for-rails-app-development
 ---
 
-If you haven't yet, please read [Designing a Rails App Part 1](/2012/05/29/designing-a-rails-app-part-1).
+If you haven't yet, please read [Designing a Rails App Part 1](/articles/2012/05/29/designing-a-rails-app-part-1).
 
 It's well known that starting a project can often be the most difficult phase of the project. You have ideas and probably some preliminary design work, but actually codifying those ideas requires a different thought process and a little bit of motivation. Often, to alieviate the difficulty of starting, you get the typical setup steps taken care of: generating a new Rails template, getting the database set up, choosing your favorite test framework, etc, giving you a familiar framework in which you can start your new project. These are the steps I need to **not** take if I'm going to understand where my pain is and how to better design and build an application.
 
@@ -56,7 +56,7 @@ So don't add persistence until you absolutely need it. Who knows, you may not ne
 
 ## Interactors are the public API of the app
 
-As I mentioned in [Part 1](/2012/05/29/designing-a-rails-app-part-1), one of the problems with Rails development is that Rails code is often written to talk to any and all objects whenever they are needed, whether it be a library, a model, a controller, or even a view. While there's nothing wrong with code autoloading &mdash; it can be a very handy tool &mdash; it has been heavily abused and used as an excuse to not care about architecture and design. I've put this last rule in place to ensure I don't fall this same trap. My unit tests will help me stay aware of dependencies as they do not load Rails and thus have to explicitly require each file needed.
+As I mentioned in [Part 1](/articles/2012/05/29/designing-a-rails-app-part-1), one of the problems with Rails development is that Rails code is often written to talk to any and all objects whenever they are needed, whether it be a library, a model, a controller, or even a view. While there's nothing wrong with code autoloading &mdash; it can be a very handy tool &mdash; it has been heavily abused and used as an excuse to not care about architecture and design. I've put this last rule in place to ensure I don't fall this same trap. My unit tests will help me stay aware of dependencies as they do not load Rails and thus have to explicitly require each file needed.
 
 Interactors are the public API of raidit. Rails code will never directly use any object that isn't an Interactor, though it may use objects that are the results of Interactor interaction. The Rails code is not allowed to access any of the Repositories directly, nor should it do anything with the domain models.
 

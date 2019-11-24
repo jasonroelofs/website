@@ -8,7 +8,7 @@ aliases:
   - /2013/02/11/raidit-final-thoughts
 ---
 
-Back in May of 2012 I [started an experiment](/2012/05/29/designing-a-rails-app-part-1) to help me learn how to develop and design Rails applications to be maintainable in the long term. Specifically I wanted to figure out how to stay away from Fat-Model Massively-Coupled code bases typical in Rails applications. To ensure I gave myself an environment of learning and didn't fall into old habits through this process, I gave myself a set of [rules for development](/2012/06/05/rules-for-rails-app-development). These rules were intentionally set to be extreme opposites of the typical Rails-Way development practices. The rules were as follows:
+Back in May of 2012 I [started an experiment](/articles/2012/05/29/designing-a-rails-app-part-1) to help me learn how to develop and design Rails applications to be maintainable in the long term. Specifically I wanted to figure out how to stay away from Fat-Model Massively-Coupled code bases typical in Rails applications. To ensure I gave myself an environment of learning and didn't fall into old habits through this process, I gave myself a set of [rules for development](/articles/2012/06/05/rules-for-rails-app-development). These rules were intentionally set to be extreme opposites of the typical Rails-Way development practices. The rules were as follows:
 
 * Don't start with Rails
 * Don't start with ActiveRecord
@@ -24,7 +24,7 @@ I broke the first rule [very early on](https://github.com/jasonroelofs/raidit/co
 
 ## Start with ActiveModel
 
-You can read a more detailed account of my adventures in persistence abstraction in the [previous post](/2013/01/28/implementing-persistence) but if you're using Rails and you don't want to dive into full database setups yet, use ActiveModel. Rails and ActiveModel are best buds, letting you send your own non-ActiveRecord models around inside of Rails helpers and url methods with reckless abandon. I've never won a fight against Rails, and ActiveModel now exists to help people stay in Rails while not using all of Rails. All of raidit's domain models are [ActiveModel entities](https://github.com/jasonroelofs/raidit/blob/master/lib/entity.rb), and Rails couldn't care less that they aren't ActiveRecord. You can even use ActiveModel outside of Rails! It's a fantastic library, and if you aren't familiar with it yet, [check it out!](https://github.com/rails/rails/tree/master/activemodel)
+You can read a more detailed account of my adventures in persistence abstraction in the [previous post](/articles/2013/01/28/implementing-persistence) but if you're using Rails and you don't want to dive into full database setups yet, use ActiveModel. Rails and ActiveModel are best buds, letting you send your own non-ActiveRecord models around inside of Rails helpers and url methods with reckless abandon. I've never won a fight against Rails, and ActiveModel now exists to help people stay in Rails while not using all of Rails. All of raidit's domain models are [ActiveModel entities](https://github.com/jasonroelofs/raidit/blob/master/lib/entity.rb), and Rails couldn't care less that they aren't ActiveRecord. You can even use ActiveModel outside of Rails! It's a fantastic library, and if you aren't familiar with it yet, [check it out!](https://github.com/rails/rails/tree/master/activemodel)
 
 ## Mock? Don't mock? Testing is hard
 
@@ -52,7 +52,7 @@ def test_some_action
 end
 </code></pre>
 
-There is nothing here to show intent. This only tests implementation, any single change breaks the entire test even though the behavior may not change at all (for example, swapping the order and limit calls), and the test is very hard to read. This code and test is easily fixed up while still using mocks and staying away from database objects by using an Intent-Revealing Name (nothing is more important than [good naming](/2012/10/01/naming-is-everything)). Simply refactor that scope mess into it's own method and mock that one method.
+There is nothing here to show intent. This only tests implementation, any single change breaks the entire test even though the behavior may not change at all (for example, swapping the order and limit calls), and the test is very hard to read. This code and test is easily fixed up while still using mocks and staying away from database objects by using an Intent-Revealing Name (nothing is more important than [good naming](/articles/2012/10/01/naming-is-everything)). Simply refactor that scope mess into it's own method and mock that one method.
 
 <pre><code data-language="ruby">
 def some_action
@@ -70,11 +70,11 @@ Now the code shows it's intent, the tests show and prove behavior, and any chang
 
 There is one very important caveat: this pattern can only be used safely if you also have an end-to-end acceptance suite. I believe this is so important that I'm going to say it again: **If you are going to use mocks in tests you must have a separate acceptance-level test suite!** If there are no tests to prove that objects to actually communicate as the mocks say they do, then the mocked tests, in many cases, are actually a hinderance, passing when the application itself fails.
 
-In raidit I made sure to have a full end-to-end [Cucumber test suite](https://github.com/jasonroelofs/raidit/tree/master/features) to ensure the mocks in my [controller tests](https://github.com/jasonroelofs/raidit/tree/master/test/controllers) were correct. I did still follow my original plan of not mocking what I own; considering Rails Controllers outside of "ownership" of the application. None of the domain-level unit tests use mocking, and with in-memory objects that worked really well, though please see my [previous post](/2013/01/28/implementing-persistence) for the caveats of this approach. I'm no longer in the "mocks are bad!" crowd but I still am careful to make sure I'm using them correctly and to have another test suite to keep my mock use in check.
+In raidit I made sure to have a full end-to-end [Cucumber test suite](https://github.com/jasonroelofs/raidit/tree/master/features) to ensure the mocks in my [controller tests](https://github.com/jasonroelofs/raidit/tree/master/test/controllers) were correct. I did still follow my original plan of not mocking what I own; considering Rails Controllers outside of "ownership" of the application. None of the domain-level unit tests use mocking, and with in-memory objects that worked really well, though please see my [previous post](/articles/2013/01/28/implementing-persistence) for the caveats of this approach. I'm no longer in the "mocks are bad!" crowd but I still am careful to make sure I'm using them correctly and to have another test suite to keep my mock use in check.
 
 ## Hide persistence details
 
-Following along the previous point, and the [previous post](/2013/01/28/implementing-persistence), if any code has to do with the details of how an object is persisted, hide that code inside of a method on that object, or in objects explicitly built to handle persistence logic. Controllers should never care how persistence is implemented. When these kinds of details are kept hidden from the rest of the application, the application's domain model can grow and evolve into a readable, reusable, understandable API that reveals the intent and capabilities of the application without bogging the reader down in unimportant implementation details.
+Following along the previous point, and the [previous post](/articles/2013/01/28/implementing-persistence), if any code has to do with the details of how an object is persisted, hide that code inside of a method on that object, or in objects explicitly built to handle persistence logic. Controllers should never care how persistence is implemented. When these kinds of details are kept hidden from the rest of the application, the application's domain model can grow and evolve into a readable, reusable, understandable API that reveals the intent and capabilities of the application without bogging the reader down in unimportant implementation details.
 
 ## Interactors, or Use OOP!
 
@@ -84,7 +84,7 @@ This isn't to say **everything** should be an interactor. As stated before I too
 
 ## The Problem Isn't Rails
 
-When you get down to it, Rails does not encourage bad code. There seems to be a case of tunnel vision, where developers get stuck in the mindset that "if Rails doesn't give it to me it doesn't exist." We need to remember that Rails isn't in control, we are. Rails is just the framework, we should always strive to keep our code well managed and organized. As Kent Beck says in his book [Smalltalk Best Practice Patterns](http://www.amazon.com/Smalltalk-Best-Practice-Patterns-Kent/dp/013476904X) 
+When you get down to it, Rails does not encourage bad code. There seems to be a case of tunnel vision, where developers get stuck in the mindset that "if Rails doesn't give it to me it doesn't exist." We need to remember that Rails isn't in control, we are. Rails is just the framework, we should always strive to keep our code well managed and organized. As Kent Beck says in his book [Smalltalk Best Practice Patterns](http://www.amazon.com/Smalltalk-Best-Practice-Patterns-Kent/dp/013476904X)
 
 > Good code invariably has small methods and small objects. Only by factoring the system into many small pieces of state and function can you hope to satisfy the "once and only once" rule. I get lots of resistance to this idea, especially from experienced developers, but no one thing I do to systems provides as much help as breaking it into more pieces.
 

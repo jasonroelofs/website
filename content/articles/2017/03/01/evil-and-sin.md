@@ -10,7 +10,7 @@ aliases:
 > The greatest trick the Devil ever pulled was convincing the world he didn't exist.
 > - *The Usual Suspects*
 
-And so we come to what's probably the most difficult discussion for any Christian, but at the same time the most important aspect of understanding Christianity and its beliefs. I started with an introduction and list of the core rules of Christianity in [What is Christianity](/articles/archives/2017/01/26/christianity) and expanded on the consequences of these beliefs and rules in [What is a Christian](/articles/archives/2017/02/13/a-christian), but to really provide a solid base for understanding Christianity, we need to tackle two oft-asked and difficult questions:
+And so we come to what's probably the most difficult discussion for any Christian, but at the same time the most important aspect of understanding Christianity and its beliefs. I started with an introduction and list of the core rules of Christianity in [What is Christianity](/articles/2017/01/26/christianity) and expanded on the consequences of these beliefs and rules in [What is a Christian](/articles/2017/02/13/a-christian), but to really provide a solid base for understanding Christianity, we need to tackle two oft-asked and difficult questions:
 
 * Why does God let bad things happen to good people?
 * Why can proclaimed Christians live lives that are so contradictory to the Christian faith?
