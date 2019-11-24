@@ -1,4 +1,5 @@
-baseURL = "https://jasonroelofs.com/"
+# baseURL = "https://jasonroelofs.com/"
+baseURL = "https://jasonroelofs.github.io/"
 languageCode = "en-us"
 title = "Jason Roelofs"
 
