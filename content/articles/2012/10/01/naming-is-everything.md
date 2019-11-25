@@ -2,7 +2,7 @@
 title: Naming is Everything
 date: '2012-10-01T12:00:00-05:00'
 draft: false
-series: designing_a_rails_app
+series: designing-a-rails-application
 titleOnly: true
 aliases:
   - /2012/10/01/naming-is-everything

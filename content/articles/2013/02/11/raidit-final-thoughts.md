@@ -2,7 +2,7 @@
 title: "RaidIt: Final Thoughts"
 date: '2013-02-11T12:00:00-05:00'
 draft: false
-series: designing_a_rails_app
+series: designing-a-rails-application
 titleOnly: true
 aliases:
   - /2013/02/11/raidit-final-thoughts

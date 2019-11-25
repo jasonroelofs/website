@@ -1,0 +1,22 @@
+{{ define "main" }}
+
+<div class="article-nav">
+  <a href="/">&laquo; Home</a>
+</div>
+
+<h1>{{ .Title }}</h1>
+
+{{ .Content }}
+
+<hr>
+
+<h3>Posts in this Series</h3>
+
+{{ $mySlug := .File.BaseFileName }}
+{{ range .Site.Pages.ByPublishDate }}
+  {{ if eq .Params.Series $mySlug }}
+    {{ partial "list_by_date" . }}
+  {{ end }}
+{{ end }}
+
+{{ end }}

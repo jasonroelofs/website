@@ -2,7 +2,7 @@
 title: Rules for Rails App Development
 date: '2012-05-29T12:00:00-05:00'
 draft: false
-series: designing_a_rails_app
+series: designing-a-rails-application
 titleOnly: true
 aliases:
   - /2012/06/05/rules-for-rails-app-development

@@ -2,7 +2,7 @@
 title: Abstract Persistence Logic
 date: '2012-07-13T12:00:00-05:00'
 draft: false
-series: designing_a_rails_app
+series: designing-a-rails-application
 titleOnly: true
 aliases:
   - /2012/07/13/abstract_persistence_logic

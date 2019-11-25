@@ -2,7 +2,7 @@
 title: Implementing Persistence
 date: '2013-01-28T12:00:00-05:00'
 draft: false
-series: designing_a_rails_app
+series: designing-a-rails-application
 titleOnly: true
 aliases:
   - /2013/01/28/implementing-persistence
