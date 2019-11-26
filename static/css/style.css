@@ -101,8 +101,9 @@ a {
 }
 
 footer {
+  font-size: 80%;
   border-top: 2px solid var(--color-text);
-  margin-top: 1em;
+  margin-top: 3em;
   width: 100%;
 
   display: flex;
