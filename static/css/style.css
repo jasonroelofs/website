@@ -47,7 +47,7 @@ h1 {
 }
 
 hr {
-  color: var(--color-secondary-2-light);
+  color: var(--color-text);
 }
 
 a {
@@ -98,4 +98,14 @@ a {
 
 .highlight pre {
   padding: 1em;
+}
+
+footer {
+  border-top: 2px solid var(--color-text);
+  margin-top: 1em;
+  width: 100%;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
