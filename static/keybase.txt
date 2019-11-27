@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/jasonroelofs
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://jasonroelofs.com
+  * I am jasonroelofs (https://keybase.io/jasonroelofs) on keybase.
+  * I have a public key ASA8Ip-6ypVDvdwozhg563SNSvvw--vLwInh4PdXDYGSSAo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0101a0652d54716ede759003c11142a2041370edc5a22146b93db7de9a6b2ba80d0e0a",
+      "host": "keybase.io",
+      "kid": "01203c229fbaca9543bddc28ce1839eb748d4afbf0fbebcbc089e1e0f7570d8192480a",
+      "uid": "5ca41e2744a258603e66abc3d8ddb000",
+      "username": "jasonroelofs"
+    },
+    "merkle_root": {
+      "ctime": 1574862314,
+      "hash": "7bf666ad6d8a6d22099837c4dd477a0d47228861fb2fba740deb521bf20f4b2691e8aecb1f7bada2526ca7779e5ac43887f00a96ef4fd368dee31dc917e1f2dd",
+      "hash_meta": "d0784e83b4ef99d4d0e21c0bb60f9666c2d4ba0c2f99542e1e7d3e2afe739ab7",
+      "seqno": 11057908
+    },
+    "service": {
+      "entropy": "dwff7kw7DsdXGYf2SMZ0SNMj",
+      "hostname": "jasonroelofs.com",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "5.0.0"
+  },
+  "ctime": 1574862319,
+  "expire_in": 504576000,
+  "prev": "1fd8950296e9aa985fa1e0bf6603d2c8f57a718f0585ccd20fecc08af187caf4",
+  "seqno": 42,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgPCKfusqVQ73cKM4YOet0jUr78Pvry8CJ4eD3Vw2BkkgKp3BheWxvYWTESpcCKsQgH9iVApbpqphfoeC/ZgPSyPV6cY8FhczSD+zAivGHyvTEID3WkWLY+Nk3Vg7jNLSB61xfVBaJ5wloURzyIOzhR6tEAgHCo3NpZ8RAzQws/BdtHQGeOOcmzIy7vWjHr7x15N2WKq044q4f73NkLTxanVvgc95UV+TQYl/G6V4Ud2oCNbTR1AAOwPo+BqhzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEICVBU1rF9Inz2zEW9I6u+NdUTwc+DmE0SjE8DDIgqDLIo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/jasonroelofs
+
+==================================================================
