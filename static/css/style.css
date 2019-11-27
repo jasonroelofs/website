@@ -62,6 +62,10 @@ a {
   width: 100%;
 }
 
+.my-info .left-info {
+  width: 50%;
+}
+
 .my-info .links {
   align-self: flex-end;
 }
@@ -114,4 +118,26 @@ footer {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+/**
+ * Mobile Breakpoints
+ */
+@media all and (max-width: 768px) {
+  .my-info {
+    display: block;
+  }
+
+  .my-info .left-info {
+    width: 100%;
+  }
+
+  .sections {
+    display: block;
+  }
+
+  .sections .column {
+    display: block;
+    width: 100%;
+  }
 }
