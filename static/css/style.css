@@ -38,7 +38,7 @@ body{
 
 h1, h2, h3 {
   line-height: 1.2;
-  font-family: 'Staatliches', cursive;
+  font-family: 'Staatliches', sans-serif;
 }
 
 h1 {
@@ -94,6 +94,11 @@ a {
 .article-short .publish-date {
   opacity: 0.6;
   font-size: 80%;
+}
+
+.series-info {
+  font-size: 70%;
+  margin-top: -1em;
 }
 
 .highlight pre {
