@@ -5,3 +5,6 @@ title = "Jason Roelofs"
 [Params]
   LeftSections = ["articles"]
   RightSections = ["series", "projects", "talks"]
+
+[permalinks]
+  articles = "/articles/:year/:month/:day/:slug"
