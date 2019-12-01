@@ -1,6 +1,6 @@
 ---
 title: Rules for Rails App Development
-date: '2012-05-29T12:00:00-05:00'
+date: '2012-06-05T12:00:00-05:00'
 draft: false
 series: designing-a-rails-application
 titleOnly: true
