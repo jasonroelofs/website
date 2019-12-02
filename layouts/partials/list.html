@@ -1,9 +1,5 @@
 <div>
-  {{ if .Params.Link }}
-    <a href="{{ .Params.Link }}">{{ .Title }}</a>
-  {{ else }}
-    <a href="{{ .URL }}">{{ .Title }}</a>
-  {{ end }}
+  {{ partial "link" . }}
 </div>
 
 {{ if not .Params.TitleOnly }}

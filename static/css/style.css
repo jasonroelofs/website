@@ -120,6 +120,11 @@ footer {
   justify-content: space-between;
 }
 
+.fas {
+  font-size: 75%;
+  padding-left: 5px;
+}
+
 /**
  * Mobile Breakpoints
  */

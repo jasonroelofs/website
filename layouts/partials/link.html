@@ -1,0 +1,10 @@
+{{ if .Params.Link }}
+  <a href="{{ .Params.Link }}">{{ .Title }}</a>
+{{ else if .Params.LivesAt }}
+  <a href="{{ .Params.LivesAt }}" target="_blank">
+    {{ .Title }}
+    <i class="fas fa-external-link-alt"></i>
+  </a>
+{{ else }}
+  <a href="{{ .URL }}">{{ .Title }}</a>
+{{ end }}
