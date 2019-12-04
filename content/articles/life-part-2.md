@@ -1,0 +1,21 @@
+---
+title: "Life, Part 2"
+date: 2019-12-03T18:29:25-05:00
+draft: true
+series: christianity
+---
+
+> Thou shalt not kill.
+> - [Exodus 20:13 (King James Version)](https://www.biblegateway.com/passage/?search=Exodus%2020:13&version=KJ21)
+
+In [Life, Part 1]({{< relref "articles/life-part-1" >}}) I focused on the beginning of life, the Christian view of life, and the immensely complex and difficult topic of abortion. The topics to be covered in this article are no less complex, but when viewed through the lense of Christ's love, something has gone very wrong in this country and these discussions need to happen. It's time to talk about the other major ways people take and give life: guns and health care.
+
+We'll start with guns. Americans have a morbid obsession with guns, unlike any other country in the world. This obsession is regularly fueled by groups like the NRA, who fund and support many politicians and leaders, as well as a fundamental distrust that most Americans have about government. America is also a statistical outlier when it comes to [gun violence per 100,000 citizens](https://www.npr.org/sections/goatsandsoda/2019/08/05/743579605/how-the-u-s-compares-to-other-countries-in-deaths-from-gun-violence). There are also reports that America may have [more guns in private ownership than citizens](https://en.wikipedia.org/wiki/Estimated_number_of_civilian_guns_per_capita_by_country), but whether that's completely true or not, the undeniable fact is that Americans own a lot of guns.
+
+So what's wrong with this picture then? Many would claim that nothing is wrong, that owning guns is our "God-given right". And while the 2nd Amendment is currently interpreted to mean that American citizens all have the right to firearms, I'd like to take a step in a different direction and ask: should we? From the Christian point of view, should we be supporting gun rights and citizen firearm ownership?
+
+To answer this question, lets start at the beginning and ask: What is a gun? You'll find a lot of different definitions but the general gist is a gun is a device that accelerates a projectile at high speed, usually through gas expansion (e.g. an explosion). We can quickly follow this up with the question: What is a gun's purpose? To efficiently and cheaply maim and/or kill a target. Now I'm no expert on guns so I'm not going to attempt any further dissemination other than to say that many people will strongly disagree with, or at least provide any number of interjections to, my answer. But this is the truth. Guns were invented as a military improvement over melee and bow-and-arrow, and all improvements we've made to guns has been around improving things like reliability, efficiency, accuracy, projectile speed, and overall destructive power. Whether you're shooting a pistol or a battleship-sized cannon, the intent is to cause death and destruction.
+
+Many will claim that they own guns for "self defense", but what exactly does that term mean? You aren't going to use a gun to deflect or block an attack. And you most assuredly will never be able to use a gun to de-escalate an already tense situation. The existence of a gun sends just one message: "mess with me and I'll kill you". No-one who's ever had the barrel of a gun pointed at them is thinking of anything else but that their life may be about to end.
+
+Please note that I have not said or implied that guns themselves are bad. Like much in life, this topic is more complicated than good and evil. Guns do have their use. I myself get to regularly benefit from the use of guns, in that my father-in-law enjoys hunting and we get to eat the venison he kills. On the other side of the coin, the other fact is is that guns exist and we cannot un-exist them or our knowledge of them. As such, the power a gun-owner wields is a power that many choose to exercise and impose over others. The ability to kill a rival necessitates thathose who are or could be targets should take similar precautions, and this is true from individuals all the way up to countries and nations. War has been around for as long as humanity has existed, and it doesn't take much to understand that if an aggressor has guns, and their targets don't, the aggressors are going to win.
