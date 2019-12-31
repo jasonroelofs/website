@@ -8,7 +8,7 @@
 
 {{ if .Params.Series }}
   {{ with .Site.GetPage (printf "/series/%s" .Params.Series) }}
-    <p class="series-info">A post in the <a href="{{ .URL }}">{{ .Title }}</a> series.</p>
+    <p class="series-info">A post in the <a href="{{ .RelPermalink }}">{{ .Title }}</a> series.</p>
   {{ end }}
 {{ end }}
 
