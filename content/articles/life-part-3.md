@@ -1,7 +1,7 @@
 ---
 title: "Life Part 3"
-date: 2020-03-29T20:30:26-04:00
-draft: true
+date: 2020-04-06T12:00:00-04:00
+draft: false
 series: christianity
 ---
 
