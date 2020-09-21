@@ -2,6 +2,7 @@
 title: "Republicanism"
 date: 2020-09-21T12:00:00-04:00
 draft: false
+series: christianity
 ---
 
 > Not everyone who says to me, ‘Lord, Lord,’ will enter the kingdom of heaven, but only the one who does the will of my Father who is in heaven.
