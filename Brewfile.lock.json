@@ -2,22 +2,26 @@
   "entries": {
     "brew": {
       "hugo": {
-        "version": "0.59.1",
+        "version": "0.78.2",
         "bottle": {
           "cellar": ":any_skip_relocation",
           "prefix": "/usr/local",
           "files": {
+            "big_sur": {
+              "url": "https://homebrew.bintray.com/bottles/hugo-0.78.2.big_sur.bottle.tar.gz",
+              "sha256": "5bee3cbeb5edff56c69fac4c199ed36baebb2725242b8f56c1349b846174b802"
+            },
             "catalina": {
-              "url": "https://homebrew.bintray.com/bottles/hugo-0.59.1.catalina.bottle.tar.gz",
-              "sha256": "f55182b7e7f4174af733c5b206cb71ea9f3c7fa723708423bd59c1218026e50a"
+              "url": "https://homebrew.bintray.com/bottles/hugo-0.78.2.catalina.bottle.tar.gz",
+              "sha256": "5570d90b9105217c01ca2122eb356ad567288e29a1b6c538e143bb9d8ff4e622"
             },
             "mojave": {
-              "url": "https://homebrew.bintray.com/bottles/hugo-0.59.1.mojave.bottle.tar.gz",
-              "sha256": "f83830d5823c01819ea8e486c7229c38331b549dc7ec1ca16ba31657dfee3dec"
+              "url": "https://homebrew.bintray.com/bottles/hugo-0.78.2.mojave.bottle.tar.gz",
+              "sha256": "9e96a53d7a2278e57d8eb148bfaf2c2866a817fac92d5020744d1293d3f1c57c"
             },
             "high_sierra": {
-              "url": "https://homebrew.bintray.com/bottles/hugo-0.59.1.high_sierra.bottle.tar.gz",
-              "sha256": "4f3da34de8dfcfdb50646eec3a4f1638dffb6a18804da4b62ea3072cc247168c"
+              "url": "https://homebrew.bintray.com/bottles/hugo-0.78.2.high_sierra.bottle.tar.gz",
+              "sha256": "d0268bc16fe927844a7f95cb9754c8d129784446a5f8f882a151fd9f0a2c8522"
             }
           }
         }
@@ -27,11 +31,11 @@
   "system": {
     "macos": {
       "mojave": {
-        "HOMEBREW_VERSION": "2.1.16",
+        "HOMEBREW_VERSION": "2.5.11",
         "HOMEBREW_PREFIX": "/usr/local",
-        "Homebrew/homebrew-core": "0c5930b3e5dd9bc366924a2d7a99acc6b55d77d9",
+        "Homebrew/homebrew-core": "28aa013c6ce9c950964745c420b2bfcad60adac1",
         "CLT": "10.3.0.0.1.1562985497",
-        "Xcode": "11.2.1",
+        "Xcode": "11.3.1",
         "macOS": "10.14.6"
       }
     }
