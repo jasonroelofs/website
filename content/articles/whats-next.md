@@ -1,7 +1,7 @@
 ---
 title: "What's Next?"
 date: 2022-02-01T12:00:00-05:00
-draft: false
+draft: true
 series: whats-next
 ---
 
