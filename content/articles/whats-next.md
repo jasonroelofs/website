@@ -1,21 +1,31 @@
 ---
 title: "What's Next?"
-date: 2022-02-01T12:00:00-05:00
+date: 2024-02-01T12:00:00-05:00
 draft: true
 series: whats-next
 ---
 
-It has been some time since I last wrote about technology and software development. I've been professionally developing software for over fifteen years, working for multiple startups, as a consultant, and currently at [Stripe](https://stripe.com). I can map over my career how my skills and methodologies of developing software has improved, but there is one question that continues to bug me: What's next?
+> Mercy without justice is the mother of dissolution; [and] justice without mercy is cruelty
+> - Thomas Acquinas
 
-Now, this isn't a "What's next for me?" but "What's next in computing?". Compared to many other fields, computing and computer science is still quite a new field, but it is incredible how far it has come in less than 100 years. From room-sized equipment that was programmed by plugging in cords to the phones we carry around in our pockets, from punch cards to languages like Go, Rust, and Elixir, this field has grown in leaps and bounds that no-one could have predicted.
+I've been writing software both professionally and as a hobby for about twenty years now, and I have to be honest, I can't just keep doing the same thing for the next twenty years. Having just come off a stint of four years at [Stripe](https://www.stripe.com) and previously having had the fortune to experience how things work inside of places like Apple and Netflix as a contractor, I don't like what I see.
 
-That said, I can't help but also feel that our field has stagnated. Creating new languages has never been easier (including [my own experiment](https://github.com/jasonroelofs/language)), but that next paradigm shift has so far eluded us. Diving into the [history of programming languages](https://en.wikipedia.org/wiki/History_of_programming_languages) shows us that major paradigm in software development, from procedural and imperative languages, through object-oriented, purely functional, and logical was all fleshed out and well understood by 1980, over 40 years ago. Every language since then has combined and/or improved upon these paradigms in different ways but I've yet to see any language today that makes me think "huh, there's something new here."
+Software has stagnated.
 
-And if even the legendary Alan Kay, the inventor of Object-oriented programming and the SmallTalk language, who spent 16 years researching new paradigms through the [Viewpoints Research Insitute](http://www.vpri.org/) didn't find it (though the papers and the research they did do is amazing and worth familiarizing yourself with), you start to wonder if there are any more major paradigms to find.
+The truth is, while companies are out there solving real problems for real people, internally these companies are powered by millions of software developers building the exact same systems and tooling in slightly different ways. Everyone needs logging, metrics, data platforms, online and offline processing, streaming, etc, and either these teams are buying existing, building their own, both, or splitting out new companies to solve these problems in slightly different ways as other competitors. And underneath it all, these tools and services are powered by the same languages, tooling, and technology, with the same problems, the same limitations, and the same frustrations.
 
-Or maybe we're looking in the wrong direction. Maybe the next step isn't going to come from programming language research at all.
+It doesn't matter if we're developing in Ruby, Python, Javascript, Java, C++, or any of the other myriad of options, software hasn't substantially changed for decades, and that has been bugging me to no end for the past few years. To put it in a more abstract sense, we as an industry have failed to make computing and computability available to all. We walk around with computational power that rivals the supercomputers of past, yet we have no ability to use that computability for our own purposes outside of what has been provided for us (or, as software developers, that we have provided for people).
 
-Delving deeper into our field's history, you'll eventually come across a little thing called the [Dynabook](https://en.wikipedia.org/wiki/Dynabook), by Alan Kay. The  Dynabook was intended to make computing so easy and intuitive to use that it would be a fundamental educational tool, making computing accessible to all. While Steve Jobs and the iPhone and iPad were heavily influenced by this idea, it's easily argued that Jobs missed the entire point of the Dynabook, as the iPad and iPhone were then designed and built for consumption instead of education.
+Maybe the best way to explain the point I'm trying to make is: what singular piece of software is the most powerful, most successful, and pivotal for the successful functioning of every single corporation?
 
-Millions of people today carry around computational devices in their pockets that put room-sized supercomputers of the past to shame, and yet the true power of these devices is locked away. We rely on others to build the apps we use, whether they be for productivity, education, or consumption (e.g. games, videos, and music). For the vast majority of people, there's no other way to use these or other devices. Even for those of us who understand software and computing, it's still significantly harder than it should be to get a computer do what you want.
+The spreadsheet.
 
+No-one talks about how the spreadsheet is a computation platform, but that's exactly what was invented in [1979](https://en.wikipedia.org/wiki/VisiCalc). Whether it's Microsoft Excel or Google Sheets, nothing has exposed the computational capabilities of computers to the masses than the spreadsheet, and that is still the case 45(!) years later. Everyone, from basic accounting to inventory tracking to weather reporting to biological research (who had to [change their own naming convention because of a feature in Excel that Microsoft refused to change](https://www.theverge.com/2020/8/6/21355674/human-genes-rename-microsoft-excel-misreading-dates)), uses spreadsheets. Conceptually they are immensely powerful for one simple fact: they start with the data first. That isn't to say spreadsheets are perfect, it's very easy to end up with an unmaintainable mess because the logic that runs them ends up hidden and difficult to keep track of.
+
+Now, I've written multiple versions of this article, all previously with the goal of trying to figure out what we should even be trying. What does "developing software" look like in the year 2030? 2040? 2050? How do we make computability more accessible and available to more people? Or to put it another way, what is the next big revolution of software and in software and computers in general? More personally, how do I want to develop software?
+
+None of these previous versions got published because, in the end, I've been asking the wrong question. We as a tech industry and community have a far greater problem in front of us:
+
+Software sucks.
+
+It is *extrodinarily* rare to encounter software that just works, doesn't crash, doesn't break in weird ways, and that you can use and forget about. My off-the-top-of-my-head list of software that hasn't made me go "WTF?" is: [vim](), [redis]()
