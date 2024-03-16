@@ -2,7 +2,7 @@
 title: "Rice"
 date: 2019-11-01T14:24:26-04:00
 weight: 2
-link: http://jasonroelofs.github.io/rice/
+link: http://ruby-rice.github.io/
 draft: false
 ---
 
