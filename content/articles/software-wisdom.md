@@ -1,7 +1,7 @@
 ---
 title: "Software Wisdom"
-date: 2025-10-03T12:00:00-04:00
-draft: true
+date: 2025-10-03T09:00:00-04:00
+draft: false
 ---
 
 > Simple things should be simple, complex things should be possible.
