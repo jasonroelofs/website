@@ -2,9 +2,12 @@ baseURL = "https://jasonroelofs.com/"
 languageCode = "en-us"
 title = "Jason Roelofs"
 
+ignoreLogs = ['warning-goldmark-raw-html']
+
 [Params]
   LeftSections = ["articles"]
   RightSections = ["series", "projects", "talks"]
 
 [permalinks]
   articles = "/articles/:year/:month/:day/:slug"
+
